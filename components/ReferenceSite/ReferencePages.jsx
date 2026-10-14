@@ -1061,7 +1061,7 @@ export default function ReferencePage({ slug, content }) {
     <div className="reference-site">
       <Header activePage={activePage} />
       {page}
-      <Discount />
+      {slug !== "contact-us" ? <Discount /> : null}
       <Footer />
       <a
         className="reference-floating-whatsapp"
