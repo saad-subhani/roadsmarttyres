@@ -1,0 +1,89 @@
+body.motion-effects-ready .motion-reveal:not(.is-visible) {
+  opacity: 0;
+  transform: translate3d(0, 2.4rem, 0);
+}
+
+.motion-reveal {
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s cubic-bezier(0.2, 0.7, 0.25, 1);
+  transition-delay: var(--motion-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.motion-reveal.is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.service-card,
+.review-card,
+.reference-why-card,
+.reference-service-card,
+.reference-blog-card {
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.service-card:hover,
+.review-card:hover,
+.reference-why-card:hover,
+.reference-service-card:hover,
+.reference-blog-card:hover {
+  transform: translateY(-0.6rem);
+}
+
+.service-card img,
+.reference-why-card > img,
+.reference-blog-card-image img {
+  transition: transform 0.55s ease;
+}
+
+.service-card:hover img,
+.reference-why-card:hover > img,
+.reference-blog-card:hover .reference-blog-card-image img {
+  transform: scale(1.04);
+}
+
+.btn,
+.reference-button,
+.reference-membership-button,
+.reference-blog-read-more {
+  transition:
+    transform 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.btn:hover,
+.reference-button:hover,
+.reference-membership-button:hover,
+.reference-blog-read-more:hover {
+  transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.motion-effects-ready .motion-reveal:not(.is-visible) {
+    opacity: 1;
+    transform: none;
+  }
+
+  .motion-reveal,
+  .service-card,
+  .review-card,
+  .reference-why-card,
+  .reference-service-card,
+  .reference-blog-card,
+  .service-card img,
+  .reference-why-card > img,
+  .reference-blog-card-image img,
+  .btn,
+  .reference-button,
+  .reference-membership-button,
+  .reference-blog-read-more {
+    transition: none;
+    transform: none;
+  }
+}

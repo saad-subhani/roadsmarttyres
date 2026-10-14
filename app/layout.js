@@ -1,5 +1,7 @@
 import { DM_Sans, Teko } from "next/font/google";
+import MotionEffects from "@/components/Animations/MotionEffects";
 import Preloader from "@/components/Preloader/Preloader";
+import "@/components/Animations/motion-effects.css";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -36,6 +38,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${dmSans.variable} ${teko.variable}`}>
         <Preloader />
+        <MotionEffects />
         {children}
       </body>
     </html>
