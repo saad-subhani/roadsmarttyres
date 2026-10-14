@@ -11,7 +11,6 @@ import Header from "../Header/Header";
 import Discount from "../Discount/Discount";
 import Testimonials from "../Testimonials/Testimonials";
 import ContactForm from "./ContactForm";
-import fallbackReviews from "./fallbackReviews";
 import blogPosts from "./blogPosts";
 import "./interior-site.css";
 
