@@ -17,6 +17,13 @@
   text-align: center;
 }
 
+.site-preloader-logo {
+  width: min(22rem, 78vw);
+  max-height: 9rem;
+  margin-bottom: 2rem;
+  object-fit: contain;
+}
+
 .site-preloader-mark {
   width: 4.6rem;
   height: 4.6rem;
