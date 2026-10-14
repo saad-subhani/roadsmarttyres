@@ -1,29 +1,15 @@
 import {
-  FiUserCheck,
-  FiLayers,
-  FiMessageCircle,
-  FiHeart,
+  FiCheck,
+  FiGlobe,
   FiArrowRight,
 } from "react-icons/fi";
 import "./CarNeeds.css";
 
 const points = [
-  {
-    icon: <FiUserCheck />,
-    title: "Trusted experts ready to assist you",
-  },
-  {
-    icon: <FiLayers />,
-    title: "Solutions for both small and large vehicles",
-  },
-  {
-    icon: <FiMessageCircle />,
-    title: "Friendly guidance from our experienced staff",
-  },
-  {
-    icon: <FiHeart />,
-    title: "Valued customer feedback drives our service",
-  },
+  "Trusted experts ready to assist you",
+  "Solutions for both small and large vehicles",
+  "Friendly guidance from our experienced staff",
+  "Valued customer feedback drives our service",
 ];
 
 export default function CarNeeds() {
@@ -49,26 +35,52 @@ export default function CarNeeds() {
         </div>
 
         <div className="needs-content">
-          <p className="eyebrow">HOW TECHNOLOGY</p>
+          <p className="needs-eyebrow">
+            <FiGlobe aria-hidden="true" />
+            HIGH TECHNOLOGY
+          </p>
           <h2 className="needs-title">
             GET ALL YOUR CAR NEEDS
             <br />
             <span className="red">IN OUR STORE</span>
           </h2>
           <p className="needs-text">
-            <strong>We provide comprehensive</strong> tyre and vehicle care
-            services to keep your car safe and performance at its best. Whether
-            you need new tyres, repairs, or expert advice, we&apos;re here to
-            help with quality you can trust.
+            We provide comprehensive tyre and vehicle care services to keep
+            your car safe and performing at its best. Whether you need new
+            tyres, repairs, or expert advice, we&apos;re here to help with
+            quality you can trust.
           </p>
 
           <div className="needs-points">
             {points.map((p) => (
-              <div className="needs-point" key={p.title}>
-                <span className="needs-icon">{p.icon}</span>
-                <p>{p.title}</p>
+              <div className="needs-point" key={p}>
+                <span className="needs-icon" aria-hidden="true">
+                  <FiCheck />
+                </span>
+                <p>{p}</p>
               </div>
             ))}
+          </div>
+
+          <div className="needs-quality">
+            <div className="needs-quality-item">
+              <div className="needs-quality-label">
+                <span>Quality Service</span>
+                <span>95%</span>
+              </div>
+              <div className="needs-quality-track" aria-label="Quality Service: 95%">
+                <span style={{ width: "95%" }} />
+              </div>
+            </div>
+            <div className="needs-quality-item">
+              <div className="needs-quality-label">
+                <span>Product Quality</span>
+                <span>90%</span>
+              </div>
+              <div className="needs-quality-track" aria-label="Product Quality: 90%">
+                <span style={{ width: "90%" }} />
+              </div>
+            </div>
           </div>
         </div>
       </div>

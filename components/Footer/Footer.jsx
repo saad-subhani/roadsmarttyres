@@ -4,12 +4,7 @@ import {
   FaTiktok,
   FaWhatsapp,
 } from "react-icons/fa";
-import {
-  FiUser,
-  FiMail,
-  FiPhoneCall,
-  FiChevronRight,
-} from "react-icons/fi";
+import { FiMail, FiPhoneCall } from "react-icons/fi";
 import "./Footer.css";
 
 export default function Footer() {
@@ -26,9 +21,52 @@ export default function Footer() {
           </a>
           <p>
             Road Smart Tyre LTD offers reliable tyre services, from brand new
-            and part-worn tyres to puncture repairs and vehicle servicing,
-            helping drivers in Ilford stay safe on the road.
+            to part-worn options, helping you stay safe on the road.
           </p>
+        </div>
+
+        <div>
+          <h4>QUICK LINKS</h4>
+          <ul className="footer-links">
+            <li><a href="/about-us">About</a></li>
+            <li><a href="/faq">Faq</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact-us">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>CUSTOMER SERVICE</h4>
+          <ul className="footer-links">
+            <li><a href="/brand-new-and-part-worn-tyres">Brand new and part worn tyres</a></li>
+            <li><a href="/breakpads-and-discs">Brakepads and discs</a></li>
+            <li><a href="/punctures-repair">Punctures repair</a></li>
+            <li><a href="/full-service">Full service</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>GET IN TOUCH</h4>
+          <ul className="footer-contact">
+            <li>
+              <a href="mailto:roadsmarttyreltd@gmail.com">
+                <FiMail />
+                <span>
+                  <strong>EMAIL</strong>
+                  Roadsmarttyreltd@gmail.com
+                </span>
+              </a>
+            </li>
+            <li>
+              <a href="tel:+447405419723">
+                <FiPhoneCall />
+                <span>
+                  <strong>PHONE</strong>
+                  +44 7405 419723
+                </span>
+              </a>
+            </li>
+          </ul>
           <div className="footer-social">
             <a
               href="https://www.facebook.com/share/1DFHUZEgE7/"
@@ -64,58 +102,13 @@ export default function Footer() {
             </a>
           </div>
         </div>
-
-        <div>
-          <h4>QUICK LINKS</h4>
-          <ul className="footer-links">
-            <li><a href="/"><FiChevronRight />Home</a></li>
-            <li><a href="/about-us"><FiChevronRight />About Us</a></li>
-            <li><a href="/services"><FiChevronRight />Services</a></li>
-            <li><a href="/brand-new-and-part-worn-tyres"><FiChevronRight />Tyres</a></li>
-            <li><a href="/contact-us"><FiChevronRight />Contact</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>SERVICES</h4>
-          <ul className="footer-links">
-            <li><a href="/brand-new-and-part-worn-tyres"><FiChevronRight />Tyres</a></li>
-            <li><a href="/punctures-repair"><FiChevronRight />Puncture Repair</a></li>
-            <li><a href="/full-service"><FiChevronRight />Full Service</a></li>
-            <li><a href="/breakpads-and-discs"><FiChevronRight />Brake Service</a></li>
-            <li><a href="/services"><FiChevronRight />All Services</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>GET IN TOUCH</h4>
-          <ul className="footer-contact footer-contact--interior">
-            <li>
-              <FiUser /> RoadSmartTyreLtd
-            </li>
-            <li>
-              <a href="mailto:roadsmarttyreltd@gmail.com">
-                <FiMail /> roadsmarttyreltd@gmail.com
-              </a>
-            </li>
-            <li>
-              <a href="tel:+447405419723">
-                <FiPhoneCall /> +44 7405 419723
-              </a>
-            </li>
-          </ul>
-        </div>
       </div>
 
       <div className="container footer-bottom">
-        <p>
-          © {new Date().getFullYear()} Road Smart Tyre. All rights reserved.
+        <p className="footer-credit">
+          ROAD SMART TYRE <span>DEVELOPED BY</span> <b>SOLTEKKERS LLC</b>
         </p>
-        <div>
-          <a href="/contact-us">Contact Us</a>
-          <span>|</span>
-          <a href="/faq">FAQs</a>
-        </div>
+        <p>Copyright © {new Date().getFullYear()}. All rights reserved.</p>
       </div>
     </footer>
   );

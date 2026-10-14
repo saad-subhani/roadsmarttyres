@@ -1,9 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap");
-
 :root {
   --red: #ff1a1a;
   --red-dark: #d90f0f;
-  --black: #0a0a0b;
+  --black: #050505;
   --card-dark: #141416;
   --text: #5f5f65;
   --border: #ececec;

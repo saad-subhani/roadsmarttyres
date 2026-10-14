@@ -1,251 +1,102 @@
 .discount {
-  isolation: isolate;
   position: relative;
+  isolation: isolate;
   display: flex;
   align-items: center;
-  min-height: 0;
-  padding: 3.2rem 0;
+  justify-content: center;
+  min-height: 50rem;
+  padding: 5rem 0;
   overflow: hidden;
-  background: #fff;
-  color: #16191d;
+  background:
+    linear-gradient(rgba(5, 6, 7, 0.86), rgba(5, 6, 7, 0.91)),
+    url("/images/off-road-tire-closeup.jpg") center / cover no-repeat;
+  color: #fff;
 }
 
 .discount-banner {
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 17rem;
-  grid-template-rows: 1fr auto;
-  align-items: center;
-  column-gap: 2rem;
-  min-height: 26rem;
-  padding: 3.5rem 4rem 0;
-  overflow: hidden;
-  border: 1px solid #e8ebee;
-  border-radius: 0.8rem;
-  background-color: #fff;
-  background-image:
-    linear-gradient(
-      90deg,
-      #fff 0%,
-      rgba(255, 255, 255, 0.99) 35%,
-      rgba(255, 255, 255, 0.82) 53%,
-      rgba(255, 255, 255, 0.12) 76%,
-      rgba(255, 255, 255, 0) 100%
-    ),
-    url("/images/off-road-tire-closeup.jpg");
-  background-repeat: no-repeat;
-  background-position: center, 82% 39%;
-  background-size: cover, auto 220%;
-  box-shadow: 0 0.8rem 2.6rem rgba(18, 27, 38, 0.08);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  width: min(85.4%, 100rem);
 }
 
 .discount-content {
-  position: relative;
-  z-index: 1;
-  align-self: center;
-  padding-bottom: 2.6rem;
+  width: 100%;
+  max-width: 72rem;
+  text-align: center;
 }
 
 .discount-eyebrow {
-  color: #ed1c24;
-  font-size: 1.35rem;
-  line-height: 1.4;
-  font-weight: 700;
+  color: var(--red);
+  font-family: var(--section-title-family);
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: 600;
   letter-spacing: 0.08em;
 }
 
 .discount-title {
-  margin-top: 0.7rem;
-  font-size: 3.5rem;
-  line-height: 1.05;
-  font-weight: 800;
-  letter-spacing: -0.035em;
-}
-
-.discount-title span {
-  color: #ed1c24;
-}
-
-.discount-subtitle {
-  margin-top: 0.8rem;
-  font-size: 1.55rem;
-  line-height: 1.35;
-  font-weight: 800;
+  margin-top: 2rem;
+  color: #fff;
+  font-size: clamp(4.4rem, 4vw, 6rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .discount-text {
-  margin-top: 0.7rem;
-  color: #646b74;
-  font-size: 1.35rem;
-  line-height: 1.5;
+  max-width: 70rem;
+  margin: 3rem auto 0;
+  color: #f1f1f1;
+  font-size: 1.8rem;
+  line-height: 1.55;
+}
+
+.discount-text strong {
+  color: #fff;
+  font-weight: 700;
 }
 
 .discount-btn {
-  min-width: 11.5rem;
-  min-height: 3.7rem;
-  margin-top: 1.5rem;
-  padding: 0 1.5rem;
-  border-radius: 0.4rem;
-  font-size: 1.2rem;
-}
-
-.discount-badge {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  justify-self: center;
-  width: 12.5rem;
-  height: 12.5rem;
-  border: 0.3rem solid #ed1c24;
-  border-right-color: rgba(237, 28, 36, 0.35);
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.94);
-  color: #ed1c24;
-  text-align: center;
-  transform: rotate(-8deg);
-}
-
-.discount-badge::before,
-.discount-badge::after {
-  content: "";
-  position: absolute;
-  inset: -0.8rem;
-  border: 1px solid rgba(237, 28, 36, 0.7);
-  border-radius: 50%;
-}
-
-.discount-badge::after {
-  inset: -1.2rem 0.2rem;
-  border-color: transparent rgba(237, 28, 36, 0.55) transparent transparent;
-  transform: rotate(32deg);
-}
-
-.discount-badge span {
-  font-size: 1.2rem;
-  line-height: 1.4;
-  font-weight: 800;
-}
-
-.discount-badge strong {
-  font-size: 4.8rem;
-  line-height: 0.95;
-  font-weight: 800;
-  letter-spacing: -0.06em;
-}
-
-.discount-benefits {
-  position: relative;
-  z-index: 1;
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  min-height: 5.2rem;
-  border-top: 1px solid rgba(213, 219, 226, 0.9);
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(0.6rem);
-}
-
-.discount-benefit {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  color: #2f3740;
-  font-size: 1.1rem;
-  font-weight: 600;
-}
-
-.discount-benefit + .discount-benefit {
-  border-left: 1px solid #d9dfe5;
-}
-
-.discount-benefit svg {
-  width: 2rem;
-  height: 2rem;
-  color: #ed1c24;
-  stroke-width: 2.2;
+  min-width: 16.5rem;
+  min-height: 5.8rem;
+  margin-top: 5.5rem;
+  padding: 0 2.5rem;
+  border-radius: 0;
+  font-size: 1.8rem;
+  font-weight: 500;
 }
 
 @media (max-width: 700px) {
   .discount {
-    padding: 2.4rem 0;
+    min-height: 44rem;
+    padding: 5rem 0;
+    background-position: center;
   }
 
   .discount-banner {
-    grid-template-columns: minmax(0, 1fr) 9rem;
-    column-gap: 0.8rem;
-    min-height: 0;
-    padding: 2.5rem 2rem 0;
-    background-position: center, 88% center;
-    background-size: cover, auto 150%;
+    width: 85.4%;
   }
 
-  .discount-content {
-    padding-bottom: 2rem;
+  .discount-eyebrow {
+    font-size: 1.7rem;
   }
 
   .discount-title {
-    font-size: 2.65rem;
-  }
-
-  .discount-subtitle {
-    max-width: 29rem;
-    font-size: 1.2rem;
+    margin-top: 1.5rem;
+    font-size: clamp(3.8rem, 9vw, 5rem);
   }
 
   .discount-text {
-    font-size: 1.2rem;
+    margin-top: 2.2rem;
+    font-size: 1.5rem;
   }
 
-  .discount-badge {
-    width: 8rem;
-    height: 8rem;
-    border-width: 0.2rem;
-  }
-
-  .discount-badge strong {
-    font-size: 3.2rem;
-  }
-
-  .discount-badge span {
-    font-size: 0.9rem;
-  }
-
-  .discount-benefits {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    min-height: 0;
-    padding: 0.5rem 0;
-  }
-
-  .discount-benefit {
-    justify-content: flex-start;
-    min-height: 4rem;
-    padding-left: 1rem;
-    font-size: 1rem;
-  }
-
-  .discount-benefit:nth-child(3) {
-    border-left: 0;
-  }
-}
-
-@media (max-width: 420px) {
-  .discount-banner {
-    grid-template-columns: 1fr;
-  }
-
-  .discount-badge {
-    position: absolute;
-    top: 2rem;
-    right: 1.7rem;
-    width: 7rem;
-    height: 7rem;
-  }
-
-  .discount-content {
-    padding-right: 6rem;
+  .discount-btn {
+    min-width: 14rem;
+    min-height: 5rem;
+    margin-top: 3.5rem;
+    font-size: 1.5rem;
   }
 }

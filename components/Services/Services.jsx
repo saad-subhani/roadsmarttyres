@@ -30,7 +30,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="services">
+    <section id="services" className="services" style={{ backgroundColor: "#000" }}>
       <div className="container">
         <p className="eyebrow">OUR SERVICES</p>
         <h2 className="services-title">
