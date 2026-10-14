@@ -11,11 +11,12 @@ export default function ContactForm() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    const form = event.currentTarget;
     setSubmitting(true);
     setMessage("");
     setSuccess(false);
 
-    const formData = new FormData(event.currentTarget);
+    const formData = new FormData(form);
     const body = new URLSearchParams();
     body.set("name", String(formData.get("name") || ""));
     body.set("email", String(formData.get("email") || ""));
@@ -40,7 +41,7 @@ export default function ContactForm() {
 
       setSuccess(true);
       setMessage(result.message || "Thanks — your message was received.");
-      event.currentTarget.reset();
+      form.reset();
     } catch (error) {
       setMessage(
         error instanceof Error

@@ -13,9 +13,10 @@ This is the selected PHP backend for Road Smart Tyre blogs, reviews, contact enq
 1. Create a MySQL database named `roadsmarttyres` (or configure a different name in `backend/.env`).
 2. From the project root, run `php backend/setup.php`. It creates `backend/.env` with a random admin password; open that file locally to view or change the credentials. Setup imports the Road Smart Tyre starter blogs and reviews only when initializing a new database.
 3. Start the PHP API in one terminal: `php -S 127.0.0.1:8000 -t backend/public backend/router.php`.
-4. Start the Next.js website in another terminal with `npm run dev`.
-5. Open `http://localhost:3000/admin` to reach the admin dashboard. The dashboard supports blog and review publishing, and managing contact enquiries.
+4. Set `BACKEND_URL=http://127.0.0.1:8000` and `NEXT_PUBLIC_BACKEND_URL=http://127.0.0.1:8000` in the root `.env.local` file. `FRONTEND_URL` in `backend/.env` must match the browser-visible website origin exactly.
+5. Start the Next.js website in another terminal with `npm run dev`.
+6. Open `http://localhost:3000/admin` to reach the admin dashboard. The dashboard supports blog and review publishing, and managing contact enquiries.
 
 The website reads published blogs and reviews from the PHP API. Contact form submissions are saved to MySQL. Email delivery is optional; configure SMTP settings in `backend/.env` to enable notifications and visitor replies.
 
-For deployment, serve only `backend/public` as the PHP document root, keep `backend/.env` private, use HTTPS with `SESSION_SECURE=true`, and set the Next.js server-side `BACKEND_URL` to the PHP API origin.
+For deployment, serve only `backend/public` as the PHP document root, keep `backend/.env` private, use HTTPS with `SESSION_SECURE=true`, and set `BACKEND_URL` to the PHP API origin and `NEXT_PUBLIC_BACKEND_URL` to its browser-accessible origin.

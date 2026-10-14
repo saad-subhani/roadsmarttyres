@@ -953,6 +953,20 @@
   margin-top: 0.3rem;
 }
 
+.reference-contact-form .contact-form-success,
+.reference-contact-form .contact-form-error {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.reference-contact-form .contact-form-success {
+  color: #6dd39a;
+}
+
+.reference-contact-form .contact-form-error {
+  color: #ff9186;
+}
+
 .reference-contact-page .reference-contact-section {
   padding-top: 6rem;
 }

@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "backend:setup": "php backend/setup.php",
+    "backend": "php -S 127.0.0.1:8000 -t backend/public backend/router.php"
   },
   "dependencies": {
     "next": "^15.0.0",

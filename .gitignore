@@ -1,2 +1,6 @@
 .next/
 node_modules/
+backend/.env
+backend/storage/
+backend/public/uploads/*
+!backend/public/uploads/.htaccess
