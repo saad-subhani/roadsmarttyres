@@ -1,5 +1,6 @@
 import { DM_Sans, Teko } from "next/font/google";
 import MotionEffects from "@/components/Animations/MotionEffects";
+import Chatbot from "@/components/Chatbot/Chatbot";
 import Preloader from "@/components/Preloader/Preloader";
 import "@/components/Animations/motion-effects.css";
 import "./globals.css";
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
       <body className={`${dmSans.variable} ${teko.variable}`}>
         <Preloader />
         <MotionEffects />
+        <Chatbot />
         {children}
       </body>
     </html>

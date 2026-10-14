@@ -1087,13 +1087,6 @@ export default function ReferencePage({ slug, content }) {
       {page}
       {slug !== "contact-us" ? <Discount /> : null}
       <Footer />
-      <a
-        className="reference-floating-whatsapp"
-        href="https://wa.me/447405419723"
-        aria-label="Chat with Road Smart Tyre on WhatsApp"
-      >
-        <FaWhatsapp aria-hidden="true" />
-      </a>
     </div>
   );
 }
