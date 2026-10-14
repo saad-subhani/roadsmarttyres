@@ -692,14 +692,20 @@ function OurServices() {
           <article
             key={card.slug}
             className="reference-service-card"
-            style={{ backgroundImage: `url("${card.image}")` }}
           >
-            <span>0{index + 1}</span>
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-            <a href={`/${card.slug}`} aria-label={`Read more about ${card.title}`}>
-              Read More
-            </a>
+            <img
+              className="reference-service-card-image"
+              src={card.image}
+              alt={card.title}
+            />
+            <div className="reference-service-card-content">
+              <span>0{index + 1}</span>
+              <h3>{card.title}</h3>
+              <p>{card.description}</p>
+              <a href={`/${card.slug}`} aria-label={`Read more about ${card.title}`}>
+                Read More
+              </a>
+            </div>
           </article>
         ))}
       </div>

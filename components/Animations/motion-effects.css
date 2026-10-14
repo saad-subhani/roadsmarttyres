@@ -36,12 +36,14 @@ body.motion-effects-ready .motion-reveal:not(.is-visible) {
 }
 
 .service-card img,
+.reference-service-card-image,
 .reference-why-card > img,
 .reference-blog-card-image img {
   transition: transform 0.55s ease;
 }
 
 .service-card:hover img,
+.reference-service-card:hover .reference-service-card-image,
 .reference-why-card:hover > img,
 .reference-blog-card:hover .reference-blog-card-image img {
   transform: scale(1.04);
@@ -77,6 +79,7 @@ body.motion-effects-ready .motion-reveal:not(.is-visible) {
   .reference-service-card,
   .reference-blog-card,
   .service-card img,
+  .reference-service-card-image,
   .reference-why-card > img,
   .reference-blog-card-image img,
   .btn,
