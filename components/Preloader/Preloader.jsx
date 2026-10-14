@@ -19,7 +19,10 @@ function waitForImage(image) {
 }
 
 function waitForVideo(video) {
-  if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+  if (
+    !video.currentSrc ||
+    video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA
+  ) {
     return Promise.resolve();
   }
 
@@ -55,13 +58,13 @@ export default function Preloader() {
 
     for (const image of document.images) {
       image.loading = "eager";
-      imageTasks.push(image.decode().catch(() => waitForImage(image)));
+      imageTasks.push(waitForImage(image));
     }
 
     for (const url of backgroundUrls) {
       const image = new Image();
       image.src = url;
-      imageTasks.push(image.decode().catch(() => waitForImage(image)));
+      imageTasks.push(waitForImage(image));
     }
 
     const assets = [...imageTasks, ...videos.map(waitForVideo)];
