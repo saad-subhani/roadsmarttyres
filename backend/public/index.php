@@ -24,7 +24,15 @@ $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 if (str_starts_with($path, '/api/admin/')) require __DIR__ . '/../app/admin-api.php';
 if ($path === '/api/content' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode(['settings'=>settings(),'courses'=>records('courses',true),'blogs'=>records('blogs',true),'services'=>records('services',true),'reviews'=>records('reviews',true)], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR); exit;
+    $siteSettings = settings();
+    echo json_encode([
+        'settings' => [
+            'siteName' => $siteSettings['siteName'] ?? 'Road Smart Tyre',
+            'logo' => $siteSettings['logo'] ?? '',
+        ],
+        'blogs' => records('blogs', true),
+        'reviews' => records('reviews', true),
+    ], JSON_UNESCAPED_SLASHES | JSON_THROW_ON_ERROR); exit;
 }
 if ($path === '/api/contact' && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     applyCors(false);
@@ -140,15 +148,15 @@ if ($path === '/api/contact' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-if (!in_array($path, ['/', '/admin', '/admin/login', '/admin/logout', '/admin/content', '/admin/edit', '/admin/delete', '/admin/settings'], true)) { http_response_code(404); exit('Not found'); }
+if (!in_array($path, ['/', '/admin', '/admin/login', '/admin/logout', '/admin/content', '/admin/edit', '/admin/delete', '/admin/contacts', '/admin/settings'], true)) { http_response_code(404); exit('Not found'); }
 if (!in_array($_SERVER['REQUEST_METHOD'], ['GET','POST'], true)) { http_response_code(405); exit; }
 if (env('ADMIN_USERNAME') === '' || strlen(env('ADMIN_PASSWORD')) < 12) { http_response_code(503); exit('Run php backend/setup.php to configure the admin account.'); }
 ini_set('session.use_strict_mode', '1'); ini_set('session.use_only_cookies', '1');
 ini_set('session.cookie_lifetime','604800'); ini_set('session.gc_maxlifetime','604800'); session_name('cms_admin'); session_set_cookie_params(['lifetime'=>604800,'path'=>'/','httponly'=>true,'secure'=>env('SESSION_SECURE','false') === 'true','samesite'=>'Lax']); session_start();
 header("Content-Security-Policy: default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'");
 $error = ''; $notice = $_SESSION['notice'] ?? ''; unset($_SESSION['notice']);
-$type = (string)($_GET['type'] ?? 'courses');
-if (!in_array($type, ['courses','blogs','services','reviews'], true)) { http_response_code(404); exit('Unknown content type'); }
+$type = (string)($_GET['type'] ?? 'blogs');
+if (!in_array($type, ['blogs','reviews'], true)) { http_response_code(404); exit('Unknown content type'); }
 if ($path !== '/admin/login' && !authenticated()) redirect('/admin/login');
 $item = isset($_GET['id']) ? record($type, (int)$_GET['id']) : null;
 if (isset($_GET['id']) && !$item && in_array($path, ['/admin/edit','/admin/delete'], true)) { http_response_code(404); exit('Content not found'); }
@@ -169,6 +177,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         if (!authenticated()) redirect('/admin/login');
         if ($path === '/admin/logout') { $_SESSION=[]; session_destroy(); redirect('/admin/login'); }
+        if ($path === '/admin/contacts') {
+            $contactId = filter_var($_POST['contactId'] ?? null, FILTER_VALIDATE_INT);
+            if (!$contactId || $contactId < 1) throw new InvalidArgumentException('Contact not found.');
+            if (isset($_POST['deleteContact'])) {
+                $stmt = db()->prepare('DELETE FROM contacts WHERE id=?');
+                $stmt->execute([$contactId]);
+                if (!$stmt->rowCount()) throw new InvalidArgumentException('Contact not found.');
+                $_SESSION['notice'] = 'Enquiry deleted.';
+            } else {
+                $status = (string)($_POST['status'] ?? '');
+                if (!in_array($status, ['new', 'read', 'archived'], true)) throw new InvalidArgumentException('Choose a valid enquiry status.');
+                $stmt = db()->prepare('UPDATE contacts SET status=? WHERE id=?');
+                $stmt->execute([$status, $contactId]);
+                if (!$stmt->rowCount()) {
+                    $exists = db()->prepare('SELECT 1 FROM contacts WHERE id=?');
+                    $exists->execute([$contactId]);
+                    if (!$exists->fetchColumn()) throw new InvalidArgumentException('Contact not found.');
+                }
+                $_SESSION['notice'] = 'Enquiry status updated.';
+            }
+            redirect('/admin/contacts');
+        }
         if ($path === '/admin/edit') { saveRecord($type,$item); $_SESSION['notice']='Content saved. Published changes are available on the website.'; redirect('/admin/content?type='.$type); }
         if ($path === '/admin/delete' && $item) { db()->prepare('DELETE FROM records WHERE id=? AND type=?')->execute([$item['id'],$type]); $_SESSION['notice']='Content deleted.'; redirect('/admin/content?type='.$type); }
         if ($path === '/admin/settings') {
@@ -197,11 +227,16 @@ $config=settings();
 <main class="login"><div class="eyebrow">WEBSITE ADMIN</div><h1>Welcome back.</h1><p>Sign in to manage your content and website identity.</p><?php if($error): ?><div role="alert" class="error"><?=e($error)?></div><?php endif ?>
 <form method="post"><?php token(); ?><label>Username<input name="username" autocomplete="username" required autofocus></label><label>Password<input name="password" type="password" autocomplete="current-password" required></label><button>Sign in</button></form></main>
 <?php else: ?>
-<aside class="sidebar"><a class="wordmark" href="/admin"><?=e($config['siteName'])?><small>CONTENT STUDIO</small></a><nav><a href="/admin">Overview</a><?php foreach(['courses','blogs','services','reviews'] as $nav): ?><a href="/admin/content?type=<?=$nav?>" <?= $type===$nav && str_contains($path,'content')?'aria-current="page"':''?>><?=ucfirst($nav)?></a><?php endforeach ?><a href="/admin/settings">Website settings</a></nav><a href="<?=e(env('FRONTEND_URL','http://localhost:3000'))?>" target="_blank" rel="noopener">View website ↗</a><form method="post" action="/admin/logout"><?php token(); ?><button class="secondary">Sign out</button></form></aside>
+<aside class="sidebar"><a class="wordmark" href="/admin"><?=e($config['siteName'])?><small>CONTENT STUDIO</small></a><nav><a href="/admin">Overview</a><?php foreach(['blogs','reviews'] as $nav): ?><a href="/admin/content?type=<?=$nav?>" <?= $type===$nav && str_contains($path,'content')?'aria-current="page"':''?>><?=ucfirst($nav)?></a><?php endforeach ?><a href="/admin/contacts" <?=$path==='/admin/contacts'?'aria-current="page"':''?>>Enquiries</a></nav><a href="<?=e(env('FRONTEND_URL','http://localhost:3000'))?>" target="_blank" rel="noopener">View website ↗</a><form method="post" action="/admin/logout"><?php token(); ?><button class="secondary">Sign out</button></form></aside>
 <main class="workspace"><header class="topbar"><span class="eyebrow">YOUR WEBSITE, YOUR CONTENT</span><span>Admin</span></header>
 <?php if($notice): ?><div class="notice" role="status"><?=e($notice)?></div><?php endif ?><?php if($error): ?><div class="error" role="alert"><?=e($error)?></div><?php endif ?>
 <?php if($path === '/admin'): ?>
-<h1>A little work.<br>A fresh website.</h1><p class="lead">Manage your courses, articles, services and brand from one place.</p><div class="stats"><?php foreach(['courses','blogs','services','reviews'] as $kind): ?><a class="panel" href="/admin/content?type=<?=$kind?>"><span><?=ucfirst($kind)?></span><strong><?=count(records($kind))?></strong><small>Manage content →</small></a><?php endforeach ?></div><section class="panel"><h2>Publish with confidence</h2><p>Create a draft, upload your image, then publish when ready. Published updates appear on new page loads without rebuilding the website.</p><a class="button" href="/admin/settings">Edit website identity</a></section>
+<h1>Road Smart Tyre<br>Content Studio</h1><p class="lead">Manage published articles, customer reviews and website enquiries.</p><div class="stats"><?php foreach(['blogs','reviews'] as $kind): ?><a class="panel" href="/admin/content?type=<?=$kind?>"><span><?=ucfirst($kind)?></span><strong><?=count(records($kind))?></strong><small>Manage content →</small></a><?php endforeach ?><a class="panel" href="/admin/contacts"><span>New enquiries</span><strong><?= (int)db()->query("SELECT COUNT(*) FROM contacts WHERE status='new'")->fetchColumn() ?></strong><small>View inbox →</small></a></div><section class="panel"><h2>Publish with confidence</h2><p>Save articles and reviews as drafts or publish them to the website. Published updates appear on new page loads without rebuilding the website.</p></section>
+<?php elseif($path === '/admin/contacts'): ?>
+<div class="pageHeading"><div><h1>Enquiries</h1><p>Messages submitted through the Road Smart Tyre contact form.</p></div></div>
+<section class="panel"><div class="tableWrap"><table><thead><tr><th>Customer</th><th>Message</th><th>Status</th><th>Received</th><th>Actions</th></tr></thead><tbody>
+<?php $contacts = db()->query('SELECT id,name,email,service,message,status,created_at FROM contacts ORDER BY created_at DESC LIMIT 500')->fetchAll(PDO::FETCH_ASSOC); foreach($contacts as $contact): ?><tr><td><strong><?=e($contact['name'])?></strong><small><a href="mailto:<?=e($contact['email'])?>"><?=e($contact['email'])?></a></small><?php if($contact['service']!==''): ?><small><?=e($contact['service'])?></small><?php endif ?></td><td><?=nl2br(e($contact['message']))?></td><td><span class="badge"><?=e($contact['status'])?></span></td><td><?=e(date('j M Y, H:i', (int)$contact['created_at']))?></td><td><div class="actions"><form method="post"><?php token(); ?><input type="hidden" name="contactId" value="<?= (int)$contact['id'] ?>"><select name="status" aria-label="Enquiry status"><option value="new" <?=$contact['status']==='new'?'selected':''?>>New</option><option value="read" <?=$contact['status']==='read'?'selected':''?>>Read</option><option value="archived" <?=$contact['status']==='archived'?'selected':''?>>Archived</option></select><button class="secondary">Save</button></form><form method="post" data-confirm="Delete this enquiry permanently?"><?php token(); ?><input type="hidden" name="contactId" value="<?= (int)$contact['id'] ?>"><button class="danger" name="deleteContact" value="1">Delete</button></form></div></td></tr><?php endforeach ?>
+</tbody></table></div><?php if(!$contacts): ?><p>No enquiries yet.</p><?php endif ?></section>
 <?php elseif($path === '/admin/content'): ?>
 <div class="pageHeading"><div><h1><?=ucfirst($type)?></h1><p>Add, edit, publish or remove your content.</p></div><a class="button" href="/admin/edit?type=<?=$type?>">+ Add <?=rtrim($type,'s')?></a></div>
 <section class="panel"><label>Search content<input id="content-search" type="search" placeholder="Search by title or slug"></label><div class="tableWrap"><table><thead><tr><th>Title / URL</th><th>Status</th><th>Order</th><th>Actions</th></tr></thead><tbody>
