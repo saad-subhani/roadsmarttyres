@@ -37,6 +37,7 @@
   display: flex;
   width: min(37rem, calc(100vw - 3.2rem));
   max-height: min(67rem, calc(100dvh - 12rem));
+  min-height: 0;
   flex-direction: column;
   overflow: hidden;
   border: 1px solid #303034;

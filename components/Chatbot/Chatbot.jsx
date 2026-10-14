@@ -57,7 +57,7 @@ export default function Chatbot() {
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState("");
   const [messages, setMessages] = useState([]);
-  const messageEnd = useRef(null);
+  const messageBody = useRef(null);
   const nextId = useRef(0);
 
   useEffect(() => {
@@ -68,7 +68,12 @@ export default function Chatbot() {
     };
 
     document.addEventListener("keydown", handleKeyDown);
-    messageEnd.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+    if (messageBody.current) {
+      messageBody.current.scrollTo({
+        top: messageBody.current.scrollHeight,
+        behavior: "smooth",
+      });
+    }
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [messages, open]);
 
@@ -114,7 +119,7 @@ export default function Chatbot() {
             </button>
           </header>
 
-          <div className="roadsmart-chat-body" aria-live="polite">
+          <div className="roadsmart-chat-body" aria-live="polite" ref={messageBody}>
             <p className="roadsmart-chat-greeting">
               Hi there! What can we help you with today?
             </p>
@@ -142,7 +147,6 @@ export default function Chatbot() {
                 </button>
               ))}
             </div>
-            <div ref={messageEnd} />
           </div>
 
           <form
