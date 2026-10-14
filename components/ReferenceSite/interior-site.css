@@ -367,12 +367,12 @@
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
-  padding: 3rem 0;
+  padding: 1.5rem 0;
   background: #000;
 }
 
 .reference-values article {
-  padding: 4rem;
+  padding: 2.5rem 3.5rem;
   background: #000;
   color: #e6e6e6;
 }
