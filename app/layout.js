@@ -1,4 +1,5 @@
 import { DM_Sans, Teko } from "next/font/google";
+import Preloader from "@/components/Preloader/Preloader";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -33,7 +34,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${dmSans.variable} ${teko.variable}`}>{children}</body>
+      <body className={`${dmSans.variable} ${teko.variable}`}>
+        <Preloader />
+        {children}
+      </body>
     </html>
   );
 }
