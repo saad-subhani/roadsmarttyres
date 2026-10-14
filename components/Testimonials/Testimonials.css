@@ -12,6 +12,12 @@
   overflow: hidden;
 }
 
+.reviews--services {
+  background:
+    linear-gradient(rgba(8, 10, 13, 0.82), rgba(8, 10, 13, 0.88)),
+    url("/images/off-road-tire-closeup.jpg") center / cover no-repeat;
+}
+
 .reviews::before,
 .reviews::after {
   content: "";

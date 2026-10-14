@@ -8,6 +8,8 @@ import {
 import { FiMail, FiPhone } from "react-icons/fi";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import Discount from "../Discount/Discount";
+import Testimonials from "../Testimonials/Testimonials";
 import ContactForm from "./ContactForm";
 import fallbackReviews from "./fallbackReviews";
 import blogPosts from "./blogPosts";
@@ -683,30 +685,7 @@ function OurServices() {
 }
 
 function ClientReviews({ reviews: cmsReviews }) {
-  return (
-    <section className="reference-client-reviews">
-      <p className="reference-section-eyebrow">Testimonial</p>
-      <h2>OUR CLIENT REVIEWS</h2>
-      <p className="reference-review-intro">
-        We’re proud to share what our customers say about us. Quality service,
-        trust, and satisfaction drive everything we do.
-      </p>
-      <div className="reference-review-grid">
-        {(cmsReviews ?? fallbackReviews).map((review) => (
-          <article className="reference-review-card" key={review.id ?? review.slug ?? review.name}>
-            <p>{review.text ?? review.description}</p>
-            <div className="reference-review-author">
-              {review.image ? <img src={review.image} alt="" /> : null}
-              <div>
-                <h3>{review.name}</h3>
-                <span>{review.role || review.category || "Customer"}</span>
-              </div>
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
+  return <Testimonials reviews={cmsReviews} variant="services" />;
 }
 
 function TyreServicesOverview() {
@@ -759,32 +738,17 @@ function TyreServicesOverview() {
   );
 }
 
-function DiscountSection() {
-  return (
-    <section className="reference-discount">
-      <h2>GET 30% DISCOUNT</h2>
-      <p>
-        Reach out to us directly through our website and claim your{" "}
-        <strong>30% discount</strong> on tyres and car services. Quick, easy,
-        and hassle-free.
-      </p>
-      <a className="reference-button" href="/contact-us">
-        Contact Us
-      </a>
-    </section>
-  );
-}
-
 function ServicesPage({ reviews }) {
   return (
     <>
       <PageBanner title="Services" pageKey="services" />
       <main className="reference-main reference-services-page">
         <OurServices />
-        <ClientReviews reviews={reviews} />
+      </main>
+      <ClientReviews reviews={reviews} />
+      <main className="reference-main reference-services-page">
         <TyreServicesOverview />
         <CarNeedsSection />
-        <DiscountSection />
       </main>
     </>
   );
@@ -1098,6 +1062,7 @@ export default function ReferencePage({ slug, content }) {
     <div className="reference-site">
       <Header activePage={activePage} />
       {page}
+      <Discount />
       <Footer />
       <a
         className="reference-floating-whatsapp"

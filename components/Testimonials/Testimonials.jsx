@@ -7,7 +7,10 @@ import { useRef } from "react";
 import fallbackReviews from "@/components/ReferenceSite/fallbackReviews";
 import "./Testimonials.css";
 
-export default function Testimonials({ reviews: cmsReviews }) {
+export default function Testimonials({
+  reviews: cmsReviews,
+  variant = "default",
+}) {
   const reviewsTrack = useRef(null);
 
   const reviews = cmsReviews ?? fallbackReviews;
@@ -27,7 +30,7 @@ export default function Testimonials({ reviews: cmsReviews }) {
   };
 
   return (
-    <section className="reviews">
+    <section className={`reviews${variant === "services" ? " reviews--services" : ""}`}>
       <div className="container">
         <div className="reviews-heading">
           <p className="eyebrow">TESTIMONIALS</p>
