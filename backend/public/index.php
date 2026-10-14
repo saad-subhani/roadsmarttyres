@@ -142,7 +142,7 @@ if ($path === '/api/contact' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-if (!in_array($path, ['/', '/admin', '/admin/login', '/admin/logout', '/admin/content', '/admin/edit', '/admin/delete', '/admin/contacts', '/admin/settings'], true)) { http_response_code(404); exit('Not found'); }
+if (!in_array($path, ['/', '/admin', '/admin/login', '/admin/logout', '/admin/content', '/admin/edit', '/admin/delete', '/admin/contacts'], true)) { http_response_code(404); exit('Not found'); }
 if (!in_array($_SERVER['REQUEST_METHOD'], ['GET','POST'], true)) { http_response_code(405); exit; }
 if (env('ADMIN_USERNAME') === '' || strlen(env('ADMIN_PASSWORD')) < 12) { http_response_code(503); exit('Run php backend/setup.php to configure the admin account.'); }
 ini_set('session.use_strict_mode', '1'); ini_set('session.use_only_cookies', '1');
@@ -195,13 +195,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         if ($path === '/admin/edit') { saveRecord($type,$item); $_SESSION['notice']='Content saved. Published changes are available on the website.'; redirect('/admin/content?type='.$type); }
         if ($path === '/admin/delete' && $item) { db()->prepare('DELETE FROM records WHERE id=? AND type=?')->execute([$item['id'],$type]); $_SESSION['notice']='Content deleted.'; redirect('/admin/content?type='.$type); }
-        if ($path === '/admin/settings') {
-            $config = settings(); $config['siteName'] = requiredText('siteName',100);
-            if (isset($_POST['removeLogo'])) $config['logo'] = '';
-            $logo = upload('logo'); if ($logo) $config['logo'] = $logo;
-            db()->prepare('UPDATE settings SET payload=? WHERE id=1')->execute([json_encode($config, JSON_THROW_ON_ERROR)]);
-            $_SESSION['notice']='Website name and logo updated.'; redirect('/admin/settings');
-        }
     } catch (InvalidArgumentException $e) { $error=$e->getMessage(); }
     catch (Throwable $e) { error_log((string)$e); $error='Could not save changes. Please try again or check server permissions.'; http_response_code(500); }
 }
@@ -239,14 +232,9 @@ $config=settings();
 <?php elseif($path === '/admin/edit'): $item=$item ?? []; ?>
 <div class="pageHeading"><div><a href="/admin/content?type=<?=$type?>">← Back to <?=e($type)?></a><h1><?=isset($item['id'])?'Edit':'Add'?> <?=rtrim($type,'s')?></h1></div></div>
 <form method="post" enctype="multipart/form-data" class="editor"><?php token(); ?><section class="panel"><h2>The essentials</h2><div class="grid"><?php field('title','Title',$item['title']??'','text',true); field('slug','URL slug',$item['slug']??'','text',true); field('category','Category / label',$item['category']??$item['tag']??''); field('sortOrder','Display order (lowest first)',$item['sortOrder']??0,'number'); ?></div><p class="hint">Use a unique URL slug such as digital-marketing. Changing a slug changes its public URL.</p><?php field('description',$type==='blogs'?'Article excerpt':'Short description',$item['description']??$item['excerpt']??'','textarea',true); ?>
-<?php if($type==='blogs') field('readTime','Reading time',$item['readTime']??'5 min read'); ?>
-<?php if($type==='courses') field('courseStatus','Course availability',$item['courseStatus']??'In development'); ?>
-<?php if($type==='services') field('hero','Detail page headline',$item['hero']??$item['title']??''); ?>
-<?php if($type!=='blogs') field('features',$type==='courses'?'Learning outcomes (one per line)':'Service features (one per line)',implode("\n",$item['outcomes']??$item['features']??[]),'textarea'); ?></section>
+<?php if($type==='blogs') field('readTime','Reading time',$item['readTime']??'5 min read'); ?></section>
 <section class="panel"><h2>Image</h2><p class="hint">JPG, PNG, WebP or GIF, maximum 5 MB. Images are saved in backend/public/uploads.</p><?php if(!empty($item['image']) && str_starts_with($item['image'],'/backend/uploads/')): ?><img class="imagePreview" src="<?=e(substr($item['image'],8))?>" alt="Current content image"><?php elseif(!empty($item['image'])): ?><p>Current image: <?=e($item['image'])?></p><?php endif ?><label>Choose image<input type="file" name="image" accept="image/jpeg,image/png,image/webp,image/gif"></label><?php field('imageAlt','Image description (accessibility)',$item['imageAlt']??''); ?><label class="check"><input type="checkbox" name="removeImage">Remove current image</label></section>
-<section class="panel"><h2>Content sections</h2><p class="hint">Add headings and paragraphs. Separate paragraphs with a blank line. Text is displayed safely as text, not HTML.</p><div id="sections">
-<?php $sections=$item['sections']??[]; if($type==='services' && !$sections) $sections=array_map(fn($x)=>['heading'=>$x['title'],'paragraphs'=>[$x['text']]],$item['detail']['capabilities']??[]); if(isset($_POST['sectionTitle'])) $sections=array_map(fn($i)=>['heading'=>$_POST['sectionTitle'][$i],'paragraphs'=>[$_POST['sectionBody'][$i]??'']],array_keys($_POST['sectionTitle'])); if(!$sections)$sections=[['heading'=>'','paragraphs'=>[]]]; foreach($sections as $section): ?><div class="contentSection"><label>Heading<input name="sectionTitle[]" value="<?=e($section['heading'])?>"></label><label>Paragraphs<textarea name="sectionBody[]" rows="6"><?=e(implode("\n\n",$section['paragraphs']))?></textarea></label><button type="button" class="secondary removeSection">Remove section</button></div><?php endforeach ?></div><button type="button" id="add-section" class="secondary">+ Add section</button></section>
+<?php if($type==='blogs'): ?><section class="panel"><h2>Article sections</h2><p class="hint">Add headings and paragraphs. Separate paragraphs with a blank line. Text is displayed safely as text, not HTML.</p><div id="sections">
+<?php $sections=$item['sections']??[]; if(isset($_POST['sectionTitle'])) $sections=array_map(fn($i)=>['heading'=>$_POST['sectionTitle'][$i],'paragraphs'=>[$_POST['sectionBody'][$i]??'']],array_keys($_POST['sectionTitle'])); if(!$sections)$sections=[['heading'=>'','paragraphs'=>[]]]; foreach($sections as $section): ?><div class="contentSection"><label>Heading<input name="sectionTitle[]" value="<?=e($section['heading'])?>"></label><label>Paragraphs<textarea name="sectionBody[]" rows="6"><?=e(implode("\n\n",$section['paragraphs']))?></textarea></label><button type="button" class="secondary removeSection">Remove section</button></div><?php endforeach ?></div><button type="button" id="add-section" class="secondary">+ Add section</button></section><?php endif ?>
 <section class="panel publish"><label>Status<select name="status"><option value="draft" <?=($_POST['status']??$item['status']??'draft')==='draft'?'selected':''?>>Draft — hidden from website</option><option value="published" <?=($_POST['status']??$item['status']??'draft')==='published'?'selected':''?>>Published — visible on website</option></select></label><button>Save changes</button></section></form>
-<?php elseif($path === '/admin/settings'): ?>
-<h1>Website identity</h1><p class="lead">One name and logo for your header, footer, page titles and website branding.</p><form method="post" enctype="multipart/form-data" class="panel editor"><?php token(); field('siteName','Website name',$config['siteName'],'text',true); ?><label>Website logo<input type="file" name="logo" accept="image/jpeg,image/png,image/webp,image/gif"></label><p class="hint">Use a transparent PNG. Maximum 5 MB. This logo is also used as the favicon.</p><?php if(str_starts_with($config['logo'],'/backend/uploads/')): ?><img class="imagePreview" src="<?=e(substr($config['logo'],8))?>" alt="Current website logo"><?php endif ?><label class="check"><input type="checkbox" name="removeLogo">Remove logo and show website name</label><button>Save website settings</button></form>
 <?php endif ?></main><?php endif ?></body></html>

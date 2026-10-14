@@ -96,39 +96,6 @@ if ($path === '/api/admin/logout' && $method === 'POST') {
     adminApiResponse(['authenticated' => false]);
 }
 
-if ($path === '/api/admin/settings' && $method === 'POST') {
-    adminApiCsrf();
-    try {
-        $config = settings();
-        $config['siteName'] = requiredText('siteName', 100);
-        $contactEmail = textField('contactEmail', 200);
-        if ($contactEmail !== '' && !filter_var($contactEmail, FILTER_VALIDATE_EMAIL)) throw new InvalidArgumentException('Please enter a valid website contact email.');
-        $config['contactEmail'] = $contactEmail !== '' ? $contactEmail : ($config['contactEmail'] ?? 'info@soltekkersllc.com');
-        if (isset($_POST['removeLogo'])) $config['logo'] = '';
-        $logo = upload('logo');
-        if ($logo) $config['logo'] = $logo;
-
-        // Email templates controlled from admin dashboard
-        $config['email'] = [
-            'notifyTo' => textField('notifyTo', 200),
-            'fromName' => textField('fromName', 120) ?: $config['siteName'],
-            'autoReplyEnabled' => isset($_POST['autoReplyEnabled']),
-            'autoReplySubject' => textField('autoReplySubject', 200) ?: 'We received your message — {{siteName}}',
-            'autoReplyBody' => textField('autoReplyBody', 8000) ?: "Hi {{name}},\n\nThanks for contacting {{siteName}}. We have received your enquiry and will get back to you shortly.\n\n— {{siteName}} team",
-            'notifySubject' => textField('notifySubject', 200) ?: 'New contact enquiry — {{name}}',
-            'notifyBody' => textField('notifyBody', 8000) ?: "New enquiry from the website:\n\nName: {{name}}\nEmail: {{email}}\nCompany: {{company}}\nService: {{service}}\nCourse: {{course}}\n\nMessage:\n{{message}}\n",
-        ];
-
-        db()->prepare('UPDATE settings SET payload=? WHERE id=1')->execute([json_encode($config, JSON_THROW_ON_ERROR)]);
-        adminApiResponse(['settings' => $config]);
-    } catch (InvalidArgumentException $error) {
-        adminApiResponse(['error' => $error->getMessage()], 422);
-    } catch (Throwable $error) {
-        error_log((string)$error);
-        adminApiResponse(['error' => 'Could not save website settings.'], 500);
-    }
-}
-
 if (preg_match('#^/api/admin/records/(blogs|reviews)(?:/([1-9][0-9]*))?$#D', $path, $matches)) {
     $type = $matches[1];
     $id = isset($matches[2]) ? (int)$matches[2] : null;
