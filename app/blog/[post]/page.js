@@ -1,14 +1,13 @@
 import { notFound } from "next/navigation";
 import ReferencePage from "@/components/ReferenceSite/ReferencePages";
 import blogPosts from "@/components/ReferenceSite/blogPosts";
-
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({ post: post.slug }));
-}
+import { getCmsContent } from "@/lib/cms";
 
 export async function generateMetadata({ params }) {
   const { post: slug } = await params;
-  const post = blogPosts.find((blogPost) => blogPost.slug === slug);
+  const content = await getCmsContent();
+  const posts = content?.blogs ?? blogPosts;
+  const post = posts.find((blogPost) => blogPost.slug === slug);
 
   if (!post) return {};
 
@@ -26,8 +25,10 @@ export async function generateMetadata({ params }) {
 
 export default async function BlogArticle({ params }) {
   const { post } = await params;
+  const content = await getCmsContent();
+  const posts = content?.blogs ?? blogPosts;
 
-  if (!blogPosts.some((blogPost) => blogPost.slug === post)) notFound();
+  if (!posts.some((blogPost) => blogPost.slug === post)) notFound();
 
-  return <ReferencePage slug={`blog-post:${post}`} />;
+  return <ReferencePage slug={`blog-post:${post}`} content={content} />;
 }

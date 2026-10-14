@@ -25,8 +25,28 @@ const reviews = [
   },
 ];
 
-export default function Testimonials() {
+export default function Testimonials({ reviews: cmsReviews }) {
   const reviewsTrack = useRef(null);
+
+  const fallbackReviews = [
+    {
+      name: "Ahmed Khan",
+      text: "Excellent service! The staff was professional and the quality is outstanding.",
+    },
+    {
+      name: "Rizwan Ali",
+      text: "Affordable prices, great service and quick turnaround. Highly recommended!",
+    },
+    {
+      name: "Rehman Ali",
+      text: "Very good customer service and quality tyres. I'm fully satisfied.",
+    },
+    {
+      name: "Umair Tariq",
+      text: "Best service for tyres and performance. Will visit again!",
+    },
+  ];
+  const reviews = cmsReviews ?? fallbackReviews;
 
   const scrollReviews = (direction) => {
     const track = reviewsTrack.current;
@@ -76,7 +96,7 @@ export default function Testimonials() {
           <div className="reviews-carousel">
             <div className="reviews-grid" ref={reviewsTrack}>
               {reviews.map((r) => (
-                <article className="review-card" key={r.name}>
+                <article className="review-card" key={r.id ?? r.slug ?? r.name}>
                   <div className="review-top">
                     <div className="review-author">
                       <span className="review-avatar" aria-hidden="true">

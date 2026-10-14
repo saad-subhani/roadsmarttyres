@@ -9,8 +9,11 @@ import CarNeeds from "@/components/CarNeeds/CarNeeds";
 import Testimonials from "@/components/Testimonials/Testimonials";
 import Discount from "@/components/Discount/Discount";
 import Footer from "@/components/Footer/Footer";
+import { getCmsContent } from "@/lib/cms";
 
-export default function Home() {
+export default async function Home() {
+  const content = await getCmsContent();
+
   return (
     <main>
       <Header activePage="home" />
@@ -36,7 +39,7 @@ export default function Home() {
       <Services />
       <TyreProducts />
       <CarNeeds />
-      <Testimonials />
+      <Testimonials reviews={content?.reviews} />
       <Discount />
       <Footer />
     </main>

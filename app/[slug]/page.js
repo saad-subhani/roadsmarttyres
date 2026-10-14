@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import ReferencePage from "@/components/ReferenceSite/ReferencePages";
+import { getCmsContent } from "@/lib/cms";
 
 const pageMetadata = {
   "about-us": {
@@ -94,5 +95,6 @@ export default async function ContentPage({ params }) {
   const { slug } = await params;
   if (!pageMetadata[slug]) notFound();
 
-  return <ReferencePage slug={slug} />;
+  const content = await getCmsContent();
+  return <ReferencePage slug={slug} content={content} />;
 }
