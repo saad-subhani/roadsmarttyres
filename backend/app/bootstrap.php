@@ -125,7 +125,7 @@ function e(mixed $value): string { return htmlspecialchars((string)$value, ENT_Q
 function redirect(string $url): never { header('Location: ' . $url, true, 303); exit; }
 
 function defaultEmailSettings(array $settings): array {
-    $site = $settings['siteName'] ?? 'Sol Tekkers';
+    $site = $settings['siteName'] ?? 'Road Smart Tyre';
     $email = is_array($settings['email'] ?? null) ? $settings['email'] : [];
     return array_merge([
         'notifyTo' => $settings['contactEmail'] ?? '',
@@ -146,7 +146,7 @@ function renderEmailTemplate(string $template, array $vars): string {
         '{{service}}' => $vars['service'] ?? '',
         '{{course}}' => $vars['course'] ?? '',
         '{{message}}' => $vars['message'] ?? '',
-        '{{siteName}}' => $vars['siteName'] ?? 'Sol Tekkers',
+        '{{siteName}}' => $vars['siteName'] ?? 'Road Smart Tyre',
     ]);
 }
 
@@ -179,7 +179,7 @@ function sendSmtpMail(string $to, string $subject, string $body, string $fromNam
     $encryption = strtolower(trim(env('SMTP_ENCRYPTION', 'tls')));
     $port = (int)env('SMTP_PORT', $encryption === 'ssl' ? '465' : '587');
     $timeout = max(1, (int)env('SMTP_TIMEOUT', '15'));
-    $fromEmail = env('MAIL_FROM') ?: env('SMTP_USERNAME', 'noreply@soltekkersllc.com');
+    $fromEmail = env('MAIL_FROM') ?: env('SMTP_USERNAME');
     $remoteHost = $encryption === 'ssl' ? 'ssl://' . $host : $host;
     $errno = 0;
     $error = '';
@@ -242,7 +242,7 @@ function sendSmtpMail(string $to, string $subject, string $body, string $fromNam
     }
 }
 
-function sendFormattedMail(string $to, string $subject, string $body, string $fromName = 'Sol Tekkers', string $replyTo = ''): bool {
+function sendFormattedMail(string $to, string $subject, string $body, string $fromName = 'Road Smart Tyre', string $replyTo = ''): bool {
     $to = trim($to);
     if ($to === '' || !filter_var($to, FILTER_VALIDATE_EMAIL)) return false;
     if (env('SMTP_HOST') !== '') {
@@ -253,7 +253,7 @@ function sendFormattedMail(string $to, string $subject, string $body, string $fr
             return false;
         }
     }
-    $fromEmail = env('MAIL_FROM', 'noreply@soltekkersllc.com');
+    $fromEmail = env('MAIL_FROM') ?: env('SMTP_USERNAME');
     $headers = [
         'MIME-Version: 1.0',
         'Content-Type: text/plain; charset=UTF-8',

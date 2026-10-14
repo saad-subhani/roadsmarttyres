@@ -171,7 +171,7 @@ if (preg_match('#^/api/admin/contacts/([1-9][0-9]*)/mail$#D', $path, $m) && $met
 
     $settings = settings();
     $mailCfg = defaultEmailSettings($settings);
-    $fromName = $mailCfg['fromName'] ?: ($settings['siteName'] ?? 'Sol Tekkers');
+    $fromName = $mailCfg['fromName'] ?: ($settings['siteName'] ?? 'Road Smart Tyre');
     $to = (string)$contact['email'];
     if (!filter_var($to, FILTER_VALIDATE_EMAIL)) {
         adminApiResponse(['error' => 'This enquiry does not have a valid email address.'], 422);

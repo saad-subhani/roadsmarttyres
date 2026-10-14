@@ -68,7 +68,9 @@ if ($path === '/api/contact' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         $mailCfg = defaultEmailSettings($settings);
         $notifyTo = $mailCfg['notifyTo'] ?: ($settings['contactEmail'] ?? '') ?: env('CONTACT_NOTIFY_TO', '');
         $mailSetupError = '';
-        if (!filter_var($notifyTo, FILTER_VALIDATE_EMAIL)) {
+        if (env('SMTP_HOST') === '' || env('SMTP_USERNAME') === '' || env('SMTP_PASSWORD') === '') {
+            $mailSetupError = 'SMTP is not configured.';
+        } elseif (!filter_var($notifyTo, FILTER_VALIDATE_EMAIL)) {
             $mailSetupError = 'Set a valid admin notification email before enabling email notifications.';
         } elseif (empty($mailCfg['autoReplyEnabled'])) {
             $mailSetupError = 'Visitor auto-replies are disabled.';
@@ -101,9 +103,9 @@ if ($path === '/api/contact' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             'service' => $service,
             'course' => $course,
             'message' => $message,
-            'siteName' => $settings['siteName'] ?? 'Sol Tekkers',
+            'siteName' => $settings['siteName'] ?? 'Road Smart Tyre',
         ];
-        $fromName = $mailCfg['fromName'] ?: ($settings['siteName'] ?? 'Sol Tekkers');
+        $fromName = $mailCfg['fromName'] ?: ($settings['siteName'] ?? 'Road Smart Tyre');
 
         // Internal notification (admin inbox) — format controlled from dashboard
         $adminMailSent = sendFormattedMail(

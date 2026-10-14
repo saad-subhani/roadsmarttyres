@@ -35,7 +35,7 @@ $defaults = [
     'MYSQL_DATABASE' => 'roadsmarttyres',
     'MYSQL_USERNAME' => 'root',
     'MYSQL_PASSWORD' => '',
-    'SMTP_HOST' => 'smtp.hostinger.com',
+    'SMTP_HOST' => '',
     'SMTP_PORT' => '465',
     'SMTP_ENCRYPTION' => 'ssl',
     'SMTP_USERNAME' => '',
@@ -88,7 +88,7 @@ try {
     }
     echo "MySQL database ready: " . env('MYSQL_DATABASE') . "\n";
     echo "Start: php -S 127.0.0.1:8000 -t backend/public backend/router.php\n";
-    echo "Admin UI: http://localhost:3000/admin (or /soltekkers)\n";
+    echo "Admin UI: http://localhost:3000/admin\n";
 } catch (Throwable $e) {
     fwrite(STDERR, "MySQL connection failed: " . $e->getMessage() . "\n\n");
     fwrite(STDERR, "Check:\n");
