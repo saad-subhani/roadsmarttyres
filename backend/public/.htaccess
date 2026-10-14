@@ -1,0 +1,33 @@
+Options -Indexes -MultiViews
+DirectoryIndex index.php
+
+# Never serve sensitive or non-public file types from the web root
+<FilesMatch "(?i)^(\.env|\.env\..*|.*\.(env|sql|sqlite|db|log|bak|old|ini|yml|yaml|json|md|lock| Dist|phar))$">
+  Require all denied
+</FilesMatch>
+<FilesMatch "(?i)^(composer\.(json|lock)|package(-lock)?\.json|\.gitignore|\.htaccess)$">
+  Require all denied
+</FilesMatch>
+
+# Block PHP execution inside uploads (defense in depth; also in uploads/.htaccess)
+RewriteEngine On
+RewriteRule ^uploads/.*\.(?i:php|phtml|phar|cgi|pl|htaccess)$ - [F,L]
+
+# Front controller
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "DENY"
+  Header set Referrer-Policy "same-origin"
+  Header always unset X-Powered-By
+  Header unset X-Powered-By
+</IfModule>
+
+# Reduce fingerprinting
+<IfModule mod_php.c>
+  php_flag display_errors Off
+  php_flag display_startup_errors Off
+  php_value expose_php Off
+</IfModule>

@@ -1,0 +1,6 @@
+document.querySelectorAll('form[data-confirm]').forEach(form=>form.addEventListener('submit',event=>{if(!confirm(form.dataset.confirm))event.preventDefault();}));
+document.querySelector('#content-search')?.addEventListener('input',event=>{document.querySelectorAll('[data-content-row]').forEach(row=>row.hidden=!row.textContent.toLowerCase().includes(event.target.value.toLowerCase()));});
+const title=document.querySelector('[name=title]'),slug=document.querySelector('[name=slug]');
+let autoSlug=slug?.value==='';slug?.addEventListener('input',()=>{autoSlug=false;});title?.addEventListener('input',()=>{if(autoSlug)slug.value=title.value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');});
+document.querySelector('#add-section')?.addEventListener('click',()=>{const section=document.createElement('div');section.className='contentSection';section.innerHTML='<label>Heading<input name="sectionTitle[]"></label><label>Paragraphs<textarea name="sectionBody[]" rows="6"></textarea></label><button type="button" class="secondary removeSection">Remove section</button>';document.querySelector('#sections').append(section);section.querySelector('input').focus();});
+document.querySelector('#sections')?.addEventListener('click',event=>{if(event.target.classList.contains('removeSection'))event.target.closest('.contentSection').remove();});

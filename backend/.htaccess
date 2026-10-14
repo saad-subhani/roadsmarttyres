@@ -1,0 +1,4 @@
+# Deny all direct web access to the backend application root.
+# Document root must be backend/public only. This is a safety net.
+Options -Indexes
+Require all denied
