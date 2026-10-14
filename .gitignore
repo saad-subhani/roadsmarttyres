@@ -1,5 +1,8 @@
 .next/
 node_modules/
+.env*
+!.env.local.example
+!backend/.env.example
 backend/.env
 backend/storage/
 backend/public/uploads/*
