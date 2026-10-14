@@ -1,0 +1,165 @@
+{
+  "blogs": [
+    {
+      "title": "Tyre Safety: When Should You Replace Your Tyres?",
+      "slug": "tyre-safety-and-when-to-replace",
+      "category": "Tyre Safety",
+      "status": "published",
+      "sortOrder": 0,
+      "description": "Learn what to look for when checking your tyres, from tread depth to visible damage, and when to ask a professional for help.",
+      "excerpt": "Learn what to look for when checking your tyres, from tread depth to visible damage, and when to ask a professional for help.",
+      "date": "October 2026",
+      "readTime": "5 min read",
+      "image": "/images/choosing-right-car-tires-1536x1024-1.jpg",
+      "imageAlt": "Choosing the right car tyres",
+      "sections": [
+        {
+          "heading": "Check your tread depth",
+          "paragraphs": [
+            "Tyre tread helps your vehicle grip the road, especially in wet conditions. UK law requires car tyres to have at least 1.6 mm of tread across the central three-quarters of the tyre around its full circumference. For added wet-weather grip, many drivers choose to replace tyres before they reach the legal limit.",
+            "Check more than one point across each tyre because wear can be uneven. If you are unsure how to measure it, ask a tyre professional to inspect them."
+          ]
+        },
+        {
+          "heading": "Look for damage and uneven wear",
+          "paragraphs": [
+            "Cracks, cuts, bulges, exposed cords, or repeated loss of pressure can indicate a tyre needs immediate attention. Uneven wear may also point to incorrect pressure, wheel alignment, or another issue that should be checked."
+          ]
+        },
+        {
+          "heading": "Make regular checks part of your routine",
+          "paragraphs": [
+            "Check tyre pressure when the tyres are cold and follow the vehicle manufacturer's recommended pressures. If a tyre looks damaged or the car feels different to drive, arrange an inspection rather than waiting for the next service."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "New or Part-Worn Tyres: How to Choose",
+      "slug": "choosing-new-or-part-worn-tyres",
+      "category": "Tyre Advice",
+      "status": "published",
+      "sortOrder": 1,
+      "description": "Compare new and part-worn tyres, understand what to check, and choose an option that suits your vehicle and budget.",
+      "excerpt": "Compare new and part-worn tyres, understand what to check, and choose an option that suits your vehicle and budget.",
+      "date": "October 2026",
+      "readTime": "5 min read",
+      "image": "/images/car-service-workers-with-new-tires-at-the-shop.jpg",
+      "imageAlt": "Tyres at a car service centre",
+      "sections": [
+        {
+          "heading": "Start with the right tyre for your vehicle",
+          "paragraphs": [
+            "Tyres should match your vehicle's required size, load rating, and speed rating. Check the handbook or the information on your vehicle before buying, and speak with a fitter if you are unsure."
+          ]
+        },
+        {
+          "heading": "What to consider with new tyres",
+          "paragraphs": [
+            "New tyres have full tread when supplied and are available in a range of brands and price points. Consider how and where you drive, the manufacturer's recommendations, and the overall condition of the other tyres on your vehicle."
+          ]
+        },
+        {
+          "heading": "What to check with part-worn tyres",
+          "paragraphs": [
+            "Part-worn tyres can be a lower-cost option, but condition and suitability matter. Ask for the tyre to be checked for tread, punctures, repairs, sidewall damage, and age before fitting. Do not use a tyre if its condition or history raises safety concerns."
+          ]
+        },
+        {
+          "heading": "Get professional fitting advice",
+          "paragraphs": [
+            "A tyre professional can confirm the correct specification, inspect the tyre, and fit and balance it properly. Choose the option that meets your vehicle's needs and gives you confidence on the road."
+          ]
+        }
+      ]
+    },
+    {
+      "title": "What to Do If You Get a Punctured Tyre",
+      "slug": "what-to-do-with-a-punctured-tyre",
+      "category": "Puncture Repair",
+      "status": "published",
+      "sortOrder": 2,
+      "description": "A simple guide to staying safe after a puncture and understanding when a tyre may be repairable.",
+      "excerpt": "A simple guide to staying safe after a puncture and understanding when a tyre may be repairable.",
+      "date": "October 2026",
+      "readTime": "4 min read",
+      "image": "/images/mechanic-unscrewing-car-wheel-with-impact-wrench.jpg",
+      "imageAlt": "A mechanic working on a car wheel",
+      "sections": [
+        {
+          "heading": "Put safety first",
+          "paragraphs": [
+            "If you notice a puncture while driving, slow down smoothly and stop somewhere safe as soon as you can. Use your hazard lights where appropriate and follow your vehicle's instructions for a spare wheel or tyre repair kit.",
+            "Avoid driving on a flat or badly deflated tyre. Doing so can damage the tyre and wheel and may make the vehicle harder to control."
+          ]
+        },
+        {
+          "heading": "Not every puncture can be repaired",
+          "paragraphs": [
+            "Whether a tyre can be repaired depends on the location and size of the damage and the tyre's overall condition. Damage to the sidewall or a tyre that has been driven while flat may make repair unsafe."
+          ]
+        },
+        {
+          "heading": "Arrange an inspection",
+          "paragraphs": [
+            "A technician needs to inspect the tyre to recommend a safe solution. If a repair is suitable, it should be carried out using an approved method; if not, replacing the tyre is the safer choice."
+          ]
+        }
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "title": "Ahmed Khan",
+      "name": "Ahmed Khan",
+      "slug": "ahmed-khan",
+      "category": "Customer",
+      "role": "Customer",
+      "description": "Excellent service! The staff was professional and the quality is outstanding.",
+      "text": "Excellent service! The staff was professional and the quality is outstanding.",
+      "status": "published",
+      "sortOrder": 0,
+      "image": "",
+      "sections": []
+    },
+    {
+      "title": "Rizwan Ali",
+      "name": "Rizwan Ali",
+      "slug": "rizwan-ali",
+      "category": "Customer",
+      "role": "Customer",
+      "description": "Affordable prices, great service and quick turnaround. Highly recommended!",
+      "text": "Affordable prices, great service and quick turnaround. Highly recommended!",
+      "status": "published",
+      "sortOrder": 1,
+      "image": "",
+      "sections": []
+    },
+    {
+      "title": "Rehman Ali",
+      "name": "Rehman Ali",
+      "slug": "rehman-ali",
+      "category": "Customer",
+      "role": "Customer",
+      "description": "Very good customer service and quality tyres. I'm fully satisfied.",
+      "text": "Very good customer service and quality tyres. I'm fully satisfied.",
+      "status": "published",
+      "sortOrder": 2,
+      "image": "",
+      "sections": []
+    },
+    {
+      "title": "Umair Tariq",
+      "name": "Umair Tariq",
+      "slug": "umair-tariq",
+      "category": "Customer",
+      "role": "Customer",
+      "description": "Best service for tyres and performance. Will visit again!",
+      "text": "Best service for tyres and performance. Will visit again!",
+      "status": "published",
+      "sortOrder": 3,
+      "image": "",
+      "sections": []
+    }
+  ]
+}
