@@ -9,6 +9,7 @@ import { FiMail, FiPhone } from "react-icons/fi";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import ContactForm from "./ContactForm";
+import fallbackReviews from "./fallbackReviews";
 import blogPosts from "./blogPosts";
 import "./interior-site.css";
 
@@ -682,29 +683,6 @@ function OurServices() {
 }
 
 function ClientReviews({ reviews: cmsReviews }) {
-  const fallbackReviews = [
-    {
-      text: "Excellent service from start to finish. They repaired my puncture perfectly and explained everything clearly. Will definitely return.",
-      name: "Lauara Watson",
-      image: "/images/E4Z6KX9-300x300-1.jpg.webp",
-    },
-    {
-      text: "Professional and honest. The team helped me choose the right tyres and handled the full service efficiently. Very satisfied!",
-      name: "John Doe",
-      image: "/images/EWC24GN-300x300-1.jpg",
-    },
-    {
-      text: "Fantastic experience! The staff were knowledgeable and helped me find the best tyre options within my budget. Highly professional and friendly.",
-      name: "Mark Wilson",
-      image: "/images/3PQNVSH-300x300-1.jpg",
-    },
-    {
-      text: "Road Smart Tyre provided quick and reliable tyre replacement for my car. Great prices and friendly staff. Highly recommend!",
-      name: "Megan Whittle",
-      image: "/images/PCXJHSB-300x300-1.jpg.webp",
-    },
-  ];
-
   return (
     <section className="reference-client-reviews">
       <p className="reference-section-eyebrow">Testimonial</p>

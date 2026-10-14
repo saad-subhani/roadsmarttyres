@@ -4,48 +4,12 @@ import { FaStar } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useRef } from "react";
+import fallbackReviews from "@/components/ReferenceSite/fallbackReviews";
 import "./Testimonials.css";
-
-const reviews = [
-  {
-    name: "Ahmed Khan",
-    text: "Excellent service! The staff was professional and the quality is outstanding.",
-  },
-  {
-    name: "Rizwan Ali",
-    text: "Affordable prices, great service and quick turnaround. Highly recommended!",
-  },
-  {
-    name: "Rehman Ali",
-    text: "Very good customer service and quality tyres. I'm fully satisfied.",
-  },
-  {
-    name: "Umair Tariq",
-    text: "Best service for tyres and performance. Will visit again!",
-  },
-];
 
 export default function Testimonials({ reviews: cmsReviews }) {
   const reviewsTrack = useRef(null);
 
-  const fallbackReviews = [
-    {
-      name: "Ahmed Khan",
-      text: "Excellent service! The staff was professional and the quality is outstanding.",
-    },
-    {
-      name: "Rizwan Ali",
-      text: "Affordable prices, great service and quick turnaround. Highly recommended!",
-    },
-    {
-      name: "Rehman Ali",
-      text: "Very good customer service and quality tyres. I'm fully satisfied.",
-    },
-    {
-      name: "Umair Tariq",
-      text: "Best service for tyres and performance. Will visit again!",
-    },
-  ];
   const reviews = cmsReviews ?? fallbackReviews;
 
   const scrollReviews = (direction) => {
