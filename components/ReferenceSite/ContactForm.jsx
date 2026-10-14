@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 
-const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL?.replace(/\/+$/, "");
-
 export default function ContactForm() {
   const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -24,10 +22,7 @@ export default function ContactForm() {
     body.set("message", String(formData.get("message") || ""));
 
     try {
-      const endpoint = backendUrl
-        ? `${backendUrl}/api/contact`
-        : "http://127.0.0.1:8000/api/contact";
-      const response = await fetch(endpoint, {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
