@@ -8,6 +8,7 @@ import {
 import { FiMail, FiPhone } from "react-icons/fi";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
+import ContactForm from "./ContactForm";
 import blogPosts from "./blogPosts";
 import "./interior-site.css";
 
@@ -680,8 +681,8 @@ function OurServices() {
   );
 }
 
-function ClientReviews() {
-  const reviews = [
+function ClientReviews({ reviews: cmsReviews }) {
+  const fallbackReviews = [
     {
       text: "Excellent service from start to finish. They repaired my puncture perfectly and explained everything clearly. Will definitely return.",
       name: "Lauara Watson",
@@ -713,14 +714,14 @@ function ClientReviews() {
         trust, and satisfaction drive everything we do.
       </p>
       <div className="reference-review-grid">
-        {reviews.map((review) => (
-          <article className="reference-review-card" key={review.name}>
-            <p>{review.text}</p>
+        {(cmsReviews ?? fallbackReviews).map((review) => (
+          <article className="reference-review-card" key={review.id ?? review.slug ?? review.name}>
+            <p>{review.text ?? review.description}</p>
             <div className="reference-review-author">
-              <img src={review.image} alt="" />
+              {review.image ? <img src={review.image} alt="" /> : null}
               <div>
                 <h3>{review.name}</h3>
-                <span>Entrepreneur</span>
+                <span>{review.role || review.category || "Customer"}</span>
               </div>
             </div>
           </article>
@@ -796,13 +797,13 @@ function DiscountSection() {
   );
 }
 
-function ServicesPage() {
+function ServicesPage({ reviews }) {
   return (
     <>
       <PageBanner title="Services" pageKey="services" />
       <main className="reference-main reference-services-page">
         <OurServices />
-        <ClientReviews />
+        <ClientReviews reviews={reviews} />
         <TyreServicesOverview />
         <CarNeedsSection />
         <DiscountSection />
@@ -869,47 +870,6 @@ function ServiceFaq({ title, intro, faqs }) {
         ))}
       </div>
     </section>
-  );
-}
-
-function ContactForm() {
-  return (
-    <form
-      className="reference-contact-form"
-      action="mailto:Roadsmarttyreltd@gmail.com"
-      method="post"
-      encType="text/plain"
-    >
-      <label>
-        Name
-        <input name="Name" placeholder="Your Name" required />
-      </label>
-      <label>
-        Email
-        <input
-          name="Email"
-          type="email"
-          placeholder="Your Email"
-          required
-        />
-      </label>
-      <label>
-        Subject
-        <input name="Subject" placeholder="Your Subject" required />
-      </label>
-      <label className="reference-form-message">
-        Message
-        <textarea
-          name="Message"
-          placeholder="Your Message"
-          rows="5"
-          required
-        />
-      </label>
-      <button className="reference-button" type="submit">
-        Send Message
-      </button>
-    </form>
   );
 }
 
@@ -1021,7 +981,7 @@ function FaqPage() {
   );
 }
 
-function BlogPage() {
+function BlogPage({ posts }) {
   return (
     <>
       <PageBanner title="Blog" pageKey="blog" />
@@ -1035,7 +995,7 @@ function BlogPage() {
           </p>
         </header>
         <div className="reference-blog-grid">
-          {blogPosts.map((post) => (
+          {posts.map((post) => (
             <article className="reference-blog-card" key={post.slug}>
               <a
                 className="reference-blog-card-image"
@@ -1076,7 +1036,7 @@ function BlogArticlePage({ post }) {
         <article>
           <header className="reference-blog-article-header">
             <p className="reference-blog-meta">
-              {post.category} <span aria-hidden="true">·</span> {post.date}
+              {post.category} <span aria-hidden="true">·</span> {post.date || post.readTime}
             </p>
             <h1>{post.title}</h1>
             <p>{post.excerpt}</p>
@@ -1123,22 +1083,24 @@ function ContactPage() {
   );
 }
 
-export default function ReferencePage({ slug }) {
+export default function ReferencePage({ slug, content }) {
   let activePage = slug;
   let page;
+  const posts = content?.blogs ?? blogPosts;
+  const reviews = content?.reviews;
 
   if (slug === "about-us") {
     page = <AboutPage />;
   } else if (slug === "services") {
-    page = <ServicesPage />;
+    page = <ServicesPage reviews={reviews} />;
   } else if (slug === "faq") {
     page = <FaqPage />;
     activePage = "faq";
   } else if (slug === "blog" || slug === "blog-2") {
-    page = <BlogPage />;
+    page = <BlogPage posts={posts} />;
     activePage = "blog";
   } else if (slug.startsWith("blog-post:")) {
-    const post = blogPosts.find(
+    const post = posts.find(
       (blogPost) => blogPost.slug === slug.slice("blog-post:".length),
     );
     if (post) {
