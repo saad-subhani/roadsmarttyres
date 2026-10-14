@@ -2,6 +2,19 @@
 
 This is the selected PHP backend for Road Smart Tyre blogs, reviews, contact enquiries and administrator login. It does not include Soltekker starter content, credentials, logs or its database.
 
+## Frontend route and component locations
+
+- `/about-us` → `app/about-us/page.jsx`
+- `/services` → `app/services/page.jsx`
+- `/faq` → `app/faq/page.jsx`
+- `/blog` → `app/blog/page.jsx`; `/blog/[post]` → `app/blog/[post]/page.js`
+- `/contact-us` → `app/contact-us/page.jsx`
+- Individual service detail routes → `app/[slug]/page.js`
+- Shared page layouts/content → `components/ReferenceSite/ReferencePages.jsx`
+- Homepage reviews → `components/Testimonials/Testimonials.jsx`; services-page reviews use the same CMS data and fallback list.
+
+Admin screens and actions stay on the website origin under `/admin` (for example `/admin/login`, `/admin/content?type=blogs`, and `/admin/contacts`). Admin API routes are available under `/admin/api/...`. `next.config.js` proxies them to the PHP backend without changing the browser URL.
+
 ## Requirements
 
 - PHP 8.2+ with PDO MySQL, fileinfo, mbstring and sessions

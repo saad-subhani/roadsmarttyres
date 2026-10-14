@@ -9,6 +9,10 @@ const nextConfig = {
       beforeFiles: [
         { source: "/admin", destination: `${backendUrl}/admin` },
         {
+          source: "/admin/api/:path*",
+          destination: `${backendUrl}/api/admin/:path*`,
+        },
+        {
           source: "/admin/:path*",
           destination: `${backendUrl}/admin/:path*`,
         },
