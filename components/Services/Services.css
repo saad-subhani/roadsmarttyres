@@ -1,0 +1,122 @@
+.services {
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 5rem 0;
+}
+
+.services .eyebrow {
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.services-title {
+  margin-top: 1.4rem;
+  font-size: 2.6rem;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.6rem;
+  margin-top: 2.6rem;
+}
+
+.service-card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: 33rem;
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  background: #171719;
+  box-shadow: 0 0.4rem 1.4rem rgba(0, 0, 0, 0.06);
+  transition: 0.25s;
+}
+
+.service-card::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.02) 20%,
+    rgba(0, 0, 0, 0.12) 42%,
+    rgba(0, 0, 0, 0.82) 100%
+  );
+  pointer-events: none;
+}
+
+.service-card:hover {
+  transform: translateY(-0.4rem);
+  box-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.12);
+}
+
+.service-img {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  height: 100%;
+  background-color: #4a4a4f;
+  transition: transform 0.4s ease;
+}
+
+.service-card:hover .service-img {
+  transform: scale(1.04);
+}
+
+.service-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.8rem 1.6rem;
+  color: #fff;
+}
+
+.service-body h3 {
+  font-size: 1.65rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.service-body p {
+  margin-top: 0.8rem;
+  font-size: 1.4rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.service-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--red);
+}
+
+@media (max-width: 1000px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    min-height: 35rem;
+  }
+}

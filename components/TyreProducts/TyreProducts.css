@@ -1,0 +1,331 @@
+.tyres {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+  padding: 1.2rem 0;
+  background: #000;
+  color: #fff;
+}
+
+.tyres::before,
+.tyres::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.tyres::before {
+  background:
+    linear-gradient(
+      158deg,
+      transparent 0 75%,
+      rgba(255, 26, 26, 0.03) 75.2%,
+      rgba(255, 26, 26, 0.2) 75.7%,
+      transparent 76.5%
+    ),
+    linear-gradient(
+      158deg,
+      transparent 0 81%,
+      rgba(255, 26, 26, 0.02) 81.2%,
+      rgba(255, 26, 26, 0.12) 81.7%,
+      transparent 82.4%
+    );
+}
+
+.tyres::after {
+  background:
+    radial-gradient(
+      ellipse at 0% 48%,
+      rgba(255, 26, 26, 0.15),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 2% 100%,
+      rgba(255, 26, 26, 0.12),
+      transparent 32%
+    );
+}
+
+.tyres-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr) minmax(0, 0.92fr);
+  align-items: center;
+  gap: clamp(1.8rem, 2.15vw, 3rem);
+  width: 90%;
+}
+
+.tyres-intro {
+  padding: 2rem 0;
+}
+
+.tyres-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  color: #ed1c24;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 1.8rem;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.tyres-eyebrow svg {
+  width: 2.7rem;
+  height: 2.7rem;
+  stroke-width: 2.2;
+}
+
+.tyres-intro-text {
+  margin-top: 4.2rem;
+  color: #c9c9c9;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 1.65rem;
+  line-height: 1.65;
+}
+
+.tyres-service-points {
+  display: grid;
+  gap: 1.55rem;
+  margin-top: 3.6rem;
+}
+
+.tyres-service-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  color: #d4d4d4;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.45;
+}
+
+.tyres-service-points svg {
+  flex: 0 0 auto;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-top: 0.15rem;
+  color: #ed1c24;
+  stroke-width: 3.5;
+}
+
+.tyres-contact-btn {
+  min-width: 16rem;
+  min-height: 5.8rem;
+  margin-top: 2.5rem;
+  border-radius: 0;
+  font-size: 1.65rem;
+}
+
+.tyres-feature {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  min-height: min(82vh, 74rem);
+  padding: 3.4rem 3rem;
+  background: #101010;
+  text-align: center;
+}
+
+.tyres-feature h2,
+.tyres-disk h2 {
+  max-width: 30rem;
+  font-size: clamp(2.8rem, 2.3vw, 3.3rem);
+  line-height: 1.12;
+  font-weight: 700;
+  text-align: center;
+}
+
+.tyres-feature-image,
+.tyres-disk-image {
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  mix-blend-mode: screen;
+  filter: brightness(1.35) contrast(1.45);
+}
+
+.tyres-feature-image {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  max-height: 34rem;
+  margin: 0.8rem 0;
+}
+
+.tyres-feature h3,
+.tyres-disk h3 {
+  font-size: clamp(2.4rem, 1.95vw, 2.8rem);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.tyres-feature p,
+.tyres-disk p {
+  margin-top: 1rem;
+  color: #d0d0d0;
+  font-family: var(--font-dm-sans), sans-serif;
+  font-size: clamp(1.35rem, 1.08vw, 1.55rem);
+  line-height: 1.65;
+}
+
+.tyres-disk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.tyres-disk h2 {
+  max-width: 27rem;
+}
+
+.tyres-disk-image {
+  width: min(100%, 29rem);
+  height: 27rem;
+  margin: 2rem 0 1rem;
+}
+
+.tyres-disk p {
+  max-width: 29rem;
+}
+
+@media (min-width: 1101px) {
+  .tyres-feature {
+    padding: clamp(22px, 2vw, 30px) clamp(18px, 1.7vw, 26px);
+    min-height: min(72vh, 650px);
+  }
+
+  .tyres-feature h2,
+  .tyres-disk h2 {
+    font-size: clamp(22px, 1.45vw, 26px);
+  }
+
+  .tyres-feature h2 {
+    max-width: 250px;
+  }
+
+  .tyres-disk h2 {
+    max-width: 220px;
+  }
+
+  .tyres-feature-image {
+    max-height: clamp(190px, 18vw, 280px);
+  }
+
+  .tyres-feature h3,
+  .tyres-disk h3 {
+    font-size: clamp(22px, 1.35vw, 24px);
+  }
+
+  .tyres-feature p,
+  .tyres-disk p {
+    font-size: clamp(13px, 0.82vw, 15px);
+  }
+
+  .tyres-intro-text {
+    font-size: clamp(14px, 0.9vw, 16px);
+  }
+
+  .tyres-service-points li {
+    font-size: clamp(13px, 0.82vw, 15px);
+  }
+
+  .tyres-disk-image {
+    width: min(100%, 240px);
+    height: clamp(170px, 16vw, 220px);
+    margin-block: clamp(8px, 0.8vw, 12px);
+  }
+
+  .tyres-eyebrow {
+    font-size: 18px;
+  }
+
+  .tyres-contact-btn {
+    min-width: 135px;
+    min-height: 48px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+  .tyres-grid {
+    gap: 1.8rem;
+  }
+
+  .tyres-feature {
+    padding-inline: 2rem;
+  }
+
+  .tyres-intro-text,
+  .tyres-service-points li {
+    font-size: 1.45rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .tyres {
+    padding: 5rem 0;
+  }
+
+  .tyres-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+  }
+
+  .tyres-intro {
+    grid-column: 1 / -1;
+  }
+
+  .tyres-feature {
+    min-height: 58rem;
+  }
+
+  .tyres-disk {
+    min-height: 55rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .tyres-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .tyres-intro {
+    grid-column: auto;
+  }
+
+  .tyres-intro-text {
+    margin-top: 2.5rem;
+  }
+
+  .tyres-feature {
+    min-height: 54rem;
+    padding: 3rem 2rem;
+  }
+
+  .tyres-feature h2,
+  .tyres-disk h2 {
+    font-size: 2.8rem;
+  }
+
+  .tyres-feature-image {
+    min-height: 25rem;
+  }
+
+  .tyres-disk {
+    min-height: 0;
+    padding: 2rem 0;
+  }
+}

@@ -1,0 +1,101 @@
+.why {
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem 0;
+}
+
+.why .eyebrow {
+  font-size: 1.2rem;
+}
+
+.why-title {
+  margin-top: 1.4rem;
+  font-size: 2.6rem;
+  line-height: 3.1rem;
+  font-weight: 800;
+}
+
+.why-sub {
+  margin-top: 1.3rem;
+  max-width: 58rem;
+  font-size: 1.4rem;
+  line-height: 2.4rem;
+  color: var(--text);
+}
+
+.why-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.6rem;
+  margin-top: 2.4rem;
+}
+
+.why-feature {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-height: 25rem;
+  padding: 2rem;
+  border: 1px solid rgba(17, 17, 17, 0.07);
+  border-radius: 0.8rem;
+  background: #fff;
+  box-shadow: 0 0.4rem 1.4rem rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.why-feature:hover {
+  transform: translateY(-0.4rem);
+  box-shadow: 0 1rem 2.4rem rgba(0, 0, 0, 0.12);
+}
+
+.why-icon {
+  flex: 0 0 5.2rem;
+  width: 5.2rem;
+  height: 5.2rem;
+  border: 1px solid var(--red);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--red);
+}
+
+.why-icon svg {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.why-feature h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.why-feature p {
+  margin-top: 0.7rem;
+  font-size: 1.25rem;
+  line-height: 2.1rem;
+  color: #6f6f75;
+  max-width: 21rem;
+}
+
+@media (max-width: 1000px) {
+  .why-features {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem;
+  }
+  .why-feature {
+    gap: 1.4rem;
+    min-height: 17rem;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .why-features {
+    grid-template-columns: 1fr;
+  }
+}

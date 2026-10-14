@@ -1,0 +1,139 @@
+.needs {
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 5rem 0;
+}
+
+.needs-grid {
+  display: grid;
+  grid-template-columns: 0.82fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.needs-image-wrap {
+  position: relative;
+}
+
+.needs-image {
+  height: 29rem;
+  border-radius: 0.8rem;
+  background-color: #6b1a1a;
+}
+
+.needs-badge {
+  position: absolute;
+  left: 3.4rem;
+  bottom: 2.2rem;
+  width: 21.3rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 1.1rem 1.4rem;
+  box-shadow: 0 0.6rem 1.8rem rgba(0, 0, 0, 0.2);
+}
+
+.needs-badge span {
+  display: block;
+  font-size: 1.05rem;
+  line-height: 1.5rem;
+  color: #555;
+}
+
+.needs-badge b {
+  display: block;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.needs-badge a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--red);
+}
+
+.needs .eyebrow {
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.needs-title {
+  margin-top: 1.4rem;
+  font-size: 2.6rem;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+.needs-text {
+  margin-top: 1.3rem;
+  max-width: 46.5rem;
+  font-size: 1.25rem;
+  line-height: 1.8;
+  color: #707076;
+}
+
+.needs-text strong {
+  color: #333;
+  font-weight: 500;
+}
+
+.needs-points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem;
+  margin-top: 2.6rem;
+}
+
+.needs-point {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.needs-icon {
+  color: var(--red);
+  flex: 0 0 auto;
+  display: grid;
+}
+
+.needs-icon svg {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.needs-point p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #707076;
+  max-width: 18rem;
+}
+
+.needs-point:nth-child(odd) p {
+  font-weight: 600;
+  color: #222;
+}
+
+@media (max-width: 1000px) {
+  .needs-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .needs-image {
+    height: 26rem;
+  }
+  .needs-points {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .needs-points {
+    grid-template-columns: 1fr;
+  }
+}

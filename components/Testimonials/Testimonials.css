@@ -1,0 +1,333 @@
+.reviews {
+  position: relative;
+  isolation: isolate;
+  background:
+    linear-gradient(rgba(5, 6, 7, 0.86), rgba(5, 6, 7, 0.91)),
+    url("/images/off-road-tire-closeup.jpg") center / cover no-repeat;
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem 0;
+  overflow: hidden;
+}
+
+.reviews::before,
+.reviews::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.reviews::before {
+  background:
+    linear-gradient(
+      145deg,
+      transparent 0 69%,
+      rgba(255, 26, 26, 0.03) 69.2%,
+      rgba(255, 26, 26, 0.18) 69.7%,
+      transparent 70.5%
+    ),
+    linear-gradient(
+      145deg,
+      transparent 0 78%,
+      rgba(255, 26, 26, 0.02) 78.2%,
+      rgba(255, 26, 26, 0.12) 78.7%,
+      transparent 79.4%
+    );
+}
+
+.reviews::after {
+  background:
+    radial-gradient(
+      ellipse at 0% 48%,
+      rgba(255, 26, 26, 0.14),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 100% 100%,
+      rgba(255, 26, 26, 0.18),
+      transparent 34%
+    );
+}
+
+.reviews > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.reviews-heading {
+  max-width: 68rem;
+  margin: 0 auto 4.5rem;
+  text-align: center;
+}
+
+.reviews-heading .eyebrow {
+  justify-content: center;
+  color: var(--red);
+  font-size: 1.2rem;
+}
+
+.reviews-heading .eyebrow::before {
+  display: none;
+}
+
+.reviews-title {
+  margin-top: 1.2rem;
+  font-size: 3.4rem;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.reviews-intro {
+  max-width: 62rem;
+  margin: 1.6rem auto 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.reviews-layout {
+  display: grid;
+  grid-template-columns: minmax(20rem, 0.78fr) minmax(0, 3fr);
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.reviews-summary {
+  display: grid;
+  grid-template-columns: 6.8rem minmax(0, 1fr);
+  align-items: start;
+  gap: 1.6rem;
+  padding: 2rem 0;
+}
+
+.reviews-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 6.8rem;
+  height: 6.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #292a2c, #111214);
+  color: var(--red);
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.reviews-brand-mark img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+}
+
+.reviews-summary-copy h3 {
+  font-size: 1.55rem;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.reviews-summary-copy > p,
+.reviews-summary-note {
+  display: block;
+  margin-top: 0.4rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 1.2rem;
+}
+
+.reviews-summary .review-stars {
+  margin-top: 1.1rem;
+}
+
+.review-stars {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #ffb400;
+  font-size: 1.55rem;
+}
+
+.reviews-summary-note {
+  margin-top: 0.7rem;
+  line-height: 1.5;
+}
+
+.reviews-carousel {
+  min-width: 0;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 3.2rem) / 3);
+  gap: 1.6rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.reviews-grid::-webkit-scrollbar {
+  display: none;
+}
+
+.review-card {
+  min-width: 0;
+  min-height: 24rem;
+  padding: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.2rem;
+  background: rgba(25, 26, 28, 0.96);
+  box-shadow: 0 1rem 2.8rem rgba(0, 0, 0, 0.24);
+  scroll-snap-align: start;
+}
+
+.review-top,
+.review-author {
+  display: flex;
+  align-items: center;
+}
+
+.review-top {
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.review-author {
+  min-width: 0;
+  gap: 1.2rem;
+}
+
+.review-avatar {
+  display: grid;
+  place-items: center;
+  flex: 0 0 4.2rem;
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+  background: #3e6493;
+  color: #fff;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.review-card:nth-child(3n + 2) .review-avatar {
+  background: #477d61;
+}
+
+.review-card:nth-child(3n) .review-avatar {
+  background: #8b5b56;
+}
+
+.review-name {
+  overflow: hidden;
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.review-date {
+  display: block;
+  margin-top: 0.3rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1.05rem;
+}
+
+.review-google {
+  flex: 0 0 auto;
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.review-card .review-stars {
+  margin-top: 1.6rem;
+}
+
+.review-text {
+  margin-top: 1.3rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 1.25rem;
+  line-height: 1.65;
+}
+
+.reviews-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 1.4rem;
+}
+
+.reviews-arrow {
+  display: grid;
+  place-items: center;
+  width: 3.6rem;
+  height: 3.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.reviews-arrow:hover {
+  border-color: rgba(255, 26, 26, 0.6);
+  background: rgba(255, 26, 26, 0.18);
+}
+
+.reviews-arrow svg {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+@media (max-width: 1000px) {
+  .reviews-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .reviews-summary {
+    grid-template-columns: 5.6rem 1fr;
+    padding: 0 0 1rem;
+  }
+
+  .reviews-brand-mark {
+    width: 5.6rem;
+    height: 5.6rem;
+  }
+
+  .reviews-grid {
+    grid-auto-columns: calc((100% - 1.6rem) / 2);
+  }
+}
+
+@media (max-width: 600px) {
+  .reviews {
+    padding: 5rem 0;
+  }
+
+  .reviews-heading {
+    margin-bottom: 2.8rem;
+  }
+
+  .reviews-title {
+    font-size: 2.6rem;
+  }
+
+  .reviews-intro {
+    font-size: 1.35rem;
+  }
+
+  .reviews-grid {
+    grid-auto-columns: 88%;
+  }
+
+  .review-card {
+    min-height: 22rem;
+  }
+}
