@@ -5,7 +5,7 @@ import {
   FaTiktok,
   FaWhatsapp,
 } from "react-icons/fa";
-import { FiMail, FiPhone } from "react-icons/fi";
+import { FiDisc, FiMail, FiPhone } from "react-icons/fi";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Discount from "../Discount/Discount";
@@ -570,6 +570,29 @@ function VisionMission() {
   );
 }
 
+function MembershipOffer() {
+  return (
+    <section className="reference-membership">
+      <div className="reference-membership-inner">
+        <div className="reference-membership-divider" aria-hidden="true">
+          <span>
+            <FiDisc />
+          </span>
+        </div>
+        <h2>JOIN OUR MEMBERSHIP NOW &amp; GET 25% DISCOUNT</h2>
+        <p>
+          Become a Road Smart Tyre member today and enjoy <strong>25% off</strong>{" "}
+          on all tyres and services. Sign up through our website — it&apos;s
+          quick, easy, and saves you money on every visit!
+        </p>
+        <a className="reference-membership-button" href="/contact-us">
+          Contact Us
+        </a>
+      </div>
+    </section>
+  );
+}
+
 function CarNeedsSection() {
   const points = [
     "Trusted experts ready to assist you",
@@ -622,6 +645,7 @@ function AboutPage() {
         <WhyChooseSection />
         <AboutStory />
         <VisionMission />
+        <MembershipOffer />
         <CarNeedsSection />
       </main>
     </>
