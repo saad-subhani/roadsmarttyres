@@ -1,6 +1,5 @@
 import Header from "@/components/Header/Header";
 import Hero from "@/components/Hero/Hero";
-import StatsCounter from "@/components/StatsCounter/StatsCounter";
 import WhyChooseUs from "@/components/WhyChooseUs/WhyChooseUs";
 import About from "@/components/About/About";
 import Services from "@/components/Services/Services";
@@ -30,9 +29,6 @@ export default async function Home() {
           <source src="/images/hero.mp4" type="video/mp4" />
         </video>
         <Hero />
-        <section className="stats-section" aria-label="Road Smart Tyre statistics">
-          <StatsCounter />
-        </section>
       </div>
       <WhyChooseUs />
       <About />

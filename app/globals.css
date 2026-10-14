@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Teko:wght@300;400;500;600;700&display=swap");
+
 :root {
   --red: #ff1a1a;
   --red-dark: #d90f0f;
@@ -5,6 +7,42 @@
   --card-dark: #141416;
   --text: #5f5f65;
   --border: #ececec;
+
+  /* Hero typography tokens */
+  --hero-heading-family: "Teko", var(--font-teko), sans-serif;
+  --hero-heading-size: 73px;
+  --hero-heading-weight: 500;
+  --hero-heading-lh: 73px;
+  --hero-heading-ls: 0.5px;
+  --hero-heading-color: #fff;
+
+  --hero-text-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  --hero-text-size: 16px;
+  --hero-text-weight: 400;
+  --hero-text-lh: 24px;
+  --hero-text-color: #e6e6e6;
+
+  --hero-btn-family: var(--font-roboto), Roboto, sans-serif;
+  --hero-btn-size: 16px;
+  --hero-btn-weight: 500;
+  --hero-btn-lh: 16px;
+  --hero-btn-ls: 0.3px;
+  --hero-btn-color: #ed1d26;
+
+  /* Global Section Heading Token (site-wide) */
+  --section-title-family: "Teko", var(--font-teko), sans-serif;
+  --section-title-size: 42px;
+  --section-title-weight: 500;
+  --section-title-lh: 42px;
+  --section-title-ls: 1.2px;
+  --section-title-color: #fff;
+
+  /* Global Section Paragraph / Body Token (site-wide) */
+  --section-text-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  --section-text-size: 15px;
+  --section-text-weight: 400;
+  --section-text-lh: 28px;
+  --section-text-color: #909090;
 }
 
 /*
@@ -120,6 +158,94 @@ section {
 .btn-outline:hover {
   border-color: var(--red);
   color: var(--red);
+}
+
+.navbar {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 14px;
+  letter-spacing: 0.5px;
+  color: #ed1d26;
+}
+
+/* ── Hero section global typography ── */
+.hero-title {
+  font-family: "Teko", var(--hero-heading-family), sans-serif;
+  font-size: var(--hero-heading-size);
+  font-weight: var(--hero-heading-weight);
+  line-height: var(--hero-heading-lh);
+  letter-spacing: var(--hero-heading-ls);
+  text-transform: uppercase;
+  color: var(--hero-heading-color);
+  text-align: center;
+}
+
+.hero-text {
+  font-family: var(--hero-text-family);
+  font-size: var(--hero-text-size);
+  font-weight: var(--hero-text-weight);
+  line-height: var(--hero-text-lh);
+  color: var(--hero-text-color);
+  text-align: center;
+}
+
+.hero-btn {
+  font-family: var(--hero-btn-family);
+  font-size: var(--hero-btn-size);
+  font-weight: var(--hero-btn-weight);
+  line-height: var(--hero-btn-lh);
+  letter-spacing: var(--hero-btn-ls);
+  color: var(--hero-btn-color);
+}
+
+.hero-btn.btn-red {
+  background-color: #ed1d26;
+  color: #ffffff;
+}
+
+.hero-btn.btn-red:hover {
+  background-color: #ffffff;
+  color: #ed1d26;
+}
+
+/* Outline hero button uses the brand red text */
+.hero-btn.btn-outline {
+  color: var(--hero-btn-color);
+}
+
+/* ── Global Section Typography (Site-wide) ── */
+.about-title,
+.services-title,
+.needs-title,
+.reviews-title,
+.discount-title,
+.why-main-title,
+.section-title,
+.tyres-feature h2 {
+  font-family: var(--section-title-family) !important;
+  font-size: var(--section-title-size) !important;
+  font-weight: var(--section-title-weight) !important;
+  line-height: var(--section-title-lh) !important;
+  letter-spacing: var(--section-title-ls) !important;
+  color: var(--section-title-color);
+  text-transform: uppercase;
+}
+
+.about-text,
+.services-desc,
+.needs-text,
+.reviews-sub,
+.reviews-intro,
+.discount-text,
+.why-description,
+.tyres-intro-text,
+.section-text {
+  font-family: var(--section-text-family) !important;
+  font-size: var(--section-text-size) !important;
+  font-weight: var(--section-text-weight) !important;
+  line-height: var(--section-text-lh) !important;
+  color: var(--section-text-color) !important;
 }
 
 .img-box {

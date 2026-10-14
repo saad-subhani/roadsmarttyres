@@ -1,4 +1,4 @@
-import { DM_Sans, Teko } from "next/font/google";
+import { DM_Sans, Teko, Roboto } from "next/font/google";
 import MotionEffects from "@/components/Animations/MotionEffects";
 import Chatbot from "@/components/Chatbot/Chatbot";
 import Preloader from "@/components/Preloader/Preloader";
@@ -14,6 +14,12 @@ const teko = Teko({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-teko",
+});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-roboto",
 });
 
 export const metadata = {
@@ -36,8 +42,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${dmSans.variable} ${teko.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${teko.variable} ${roboto.variable}`}>
+      <body className={`${dmSans.variable} ${teko.variable} ${roboto.variable}`}>
         <Preloader />
         <MotionEffects />
         <Chatbot />
