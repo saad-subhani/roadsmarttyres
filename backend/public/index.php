@@ -64,30 +64,17 @@ if ($path === '/api/contact' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         if (mb_strlen($service) > 160) throw new InvalidArgumentException('Service is too long.');
         if (mb_strlen($course) > 200) throw new InvalidArgumentException('Course selection is too long.');
         if ($message === '' || mb_strlen($message) > 3000) throw new InvalidArgumentException('Please enter a message (max 3000 characters).');
-        if (env('SMTP_HOST') === '' || env('SMTP_USERNAME') === '' || env('SMTP_PASSWORD') === '') {
-            http_response_code(503);
-            echo json_encode(['error' => 'Email delivery is not configured yet. Add the Hostinger mailbox username and password to backend/.env, then restart the backend.']);
-            exit;
-        }
         $settings = settings();
         $mailCfg = defaultEmailSettings($settings);
         $notifyTo = $mailCfg['notifyTo'] ?: ($settings['contactEmail'] ?? '') ?: env('CONTACT_NOTIFY_TO', '');
+        $mailSetupError = '';
         if (!filter_var($notifyTo, FILTER_VALIDATE_EMAIL)) {
-            http_response_code(503);
-            echo json_encode(['error' => 'Set a valid admin notification email in the admin website settings before accepting enquiries.']);
-            exit;
-        }
-        if (empty($mailCfg['autoReplyEnabled'])) {
-            http_response_code(503);
-            echo json_encode(['error' => 'Enable visitor auto-replies in admin website settings before accepting enquiries.']);
-            exit;
+            $mailSetupError = 'Set a valid admin notification email before enabling email notifications.';
+        } elseif (empty($mailCfg['autoReplyEnabled'])) {
+            $mailSetupError = 'Visitor auto-replies are disabled.';
         }
         $fromEmail = env('MAIL_FROM', env('SMTP_USERNAME'));
-        if (!filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) {
-            http_response_code(503);
-            echo json_encode(['error' => 'Set MAIL_FROM to a valid address belonging to your configured mail service.']);
-            exit;
-        }
+        if ($mailSetupError === '' && !filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) $mailSetupError = 'Set MAIL_FROM to a valid address belonging to your configured mail service.';
         $ip = (string)($_SERVER['REMOTE_ADDR'] ?? '');
         $since = time() - 900;
         $stmt = db()->prepare('SELECT COUNT(*) FROM contacts WHERE ip=? AND created_at>=?');
@@ -99,6 +86,13 @@ if ($path === '/api/contact' && $_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         db()->prepare('INSERT INTO contacts(name,email,company,service,course,message,status,created_at,ip) VALUES(?,?,?,?,?,?,?,?,?)')
             ->execute([$name, $email, $company, $service, $course, $message, 'new', time(), $ip]);
+
+        if ($mailSetupError !== '') {
+            error_log('Contact saved without email notification: ' . $mailSetupError);
+            http_response_code(202);
+            echo json_encode(['ok' => true, 'message' => 'Your enquiry was saved. Email notifications are not configured yet.']);
+            exit;
+        }
 
         $vars = [
             'name' => $name,
